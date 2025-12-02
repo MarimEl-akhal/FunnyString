@@ -9,14 +9,6 @@ public class StringFunifier {
     private List<Integer> startIndex;
     private List<Integer> endIndex;
 
-    public String reverse(int start, int end) {
-        String rev = "";
-        for (int i = end; i >= start; i--) {
-            rev += boringString.charAt(i);
-        }
-        return rev;
-    }
-
 
     public String getFunnyString() {
         String funnyString = "";
@@ -35,25 +27,16 @@ public class StringFunifier {
             index = end + 1;
 
         }
-        for (int j = index; j < boringString.length(); j++) {
-            funnyString += boringString.charAt(j);
-        }
+
 
         return funnyString;
     }
 
 
-    public String getBoringString() {
-        return boringString;
-    }
-
     public void setBoringString(String boringString) {
         this.boringString = boringString;
     }
 
-    public List<Integer> getStartIndex() {
-        return startIndex;
-    }
 
     public List<Integer> setStartIndex(String start) {
         this.startIndex = new ArrayList<>();
@@ -75,6 +58,14 @@ public class StringFunifier {
             if (!e.isEmpty()) endIndex.add(Integer.parseInt(e));
         }
         return endIndex;
+    }
+
+    private String reverse(int start, int end) {
+        String rev = "";
+        for (int i = end; i >= start; i--) {
+            rev += boringString.charAt(i);
+        }
+        return rev;
     }
 }
 
