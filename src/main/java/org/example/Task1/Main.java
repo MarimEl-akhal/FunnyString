@@ -20,8 +20,9 @@ public class Main {
         funnyString.setOperations(parsing.parseListOfOperationToken(in.nextLine()));
 
 
+
         //System.out.println("getFunnyRanges() => " + funnyString.getFunRanges());
-        System.out.println("getFunnyString() => " + funnyString.getFunnyString());
+        System.out.println( funnyString.getFunnyString());
 
 
 

@@ -27,6 +27,7 @@ public class StringFunifier {
         String funnyString = "";
         int index = 0;
 
+
         for (int i = 0; i < startIndexList.size(); i++) {
             int start = startIndexList.get(i);
             int end = endIndexList.get(i);
@@ -34,7 +35,7 @@ public class StringFunifier {
             for (int j = index; j < start; j++) {
                 funnyString += boringString.charAt(j);
             }
-            funnyString += "(" + stringOperation.applyOperation(op,boringString,start, end) + ")";
+            funnyString += "(" + stringOperation.applyOperation(op,boringString,start,end)+ ")";
             index = end + 1;
         }
         for (int j = index; j < boringString.length(); j++) {
@@ -79,7 +80,8 @@ public class StringFunifier {
     }
 
     public void setStartIndexList(List<Integer> startIndexList) {
-        this.startIndexList = parsing.parseListOfIndexToken(startIndexList.toString());
+
+        this.startIndexList =startIndexList;
     }
 
     public List<Integer> getEndIndexList() {
@@ -87,7 +89,7 @@ public class StringFunifier {
     }
 
     public void setEndIndexList(List<Integer> endIndexList) {
-        this.endIndexList =parsing.parseListOfIndexToken(endIndexList.toString());
+        this.endIndexList =endIndexList;
     }
 
     public List<String> getOperations() {
@@ -95,7 +97,7 @@ public class StringFunifier {
     }
 
     public void setOperations(List<String> operations) {
-        this.operations = parsing.parseListOfOperationToken(operations.toString());
+        this.operations = operations;
     }
 
 

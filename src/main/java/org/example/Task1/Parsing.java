@@ -3,12 +3,12 @@ package org.example.Task1;
 import java.util.*;
 
 public class Parsing implements IParsing {
-  private  String charSplit = "\\*";
+  private  String charSplit = "\\s*,\\s*";
 
     @Override
     public List<Integer> parseListOfIndexToken(String tokenIndex) {
         List<Integer> inputList = new ArrayList<>();
-        String[] Indx = tokenIndex.replace(" " ,"").split(charSplit);
+        String[] Indx = tokenIndex.split(charSplit);
         for (String e : Indx) {
             if (!e.isEmpty() && isNumber(e))
                 inputList.add(Integer.parseInt(e));
