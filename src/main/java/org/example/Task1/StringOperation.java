@@ -15,7 +15,7 @@ public class StringOperation implements IStringOperation {
 
     @Override
     public String upperCase(String input, int start, int end) {
-        String upperSubString = input.substring(start,end+1).toUpperCase();
+        String upperSubString = input.substring(start, end + 1).toUpperCase();
         return upperSubString;
     }
 
@@ -59,7 +59,7 @@ public class StringOperation implements IStringOperation {
             case "LOWERCASE" -> lowerCase(input, start, end);
             case "SORT" -> sort(input, start, end);
             case "COMPRESSION" -> runLengthEncoding(input, start, end);
-            default -> input.substring(start, end +1);
+            default -> input.substring(start, end + 1);
         };
     }
 

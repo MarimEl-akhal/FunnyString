@@ -4,6 +4,7 @@ import java.util.List;
 
 public interface IParsing {
     public List<Integer> parseListOfIndexToken(String tokenIndex);
-    public  List<String> parseListOfOperationToken(String token);
+
+    public List<String> parseListOfOperationToken(String token);
 
 }

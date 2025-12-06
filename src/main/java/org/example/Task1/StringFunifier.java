@@ -6,26 +6,25 @@ import java.util.List;
 public class StringFunifier {
 
     private String boringString;
+    private String startIndex;
+    private String endIndex;
+    private String operation;
+
+    private IStringOperation stringOperation;
+    private IParsing parsing;
+
     private List<Integer> startIndexList;
     private List<Integer> endIndexList;
     private List<String> operations;
 
 
-    private  IStringOperation stringOperation;
-    private  IParsing parsing;
-
-    public StringFunifier() {
-        this.startIndexList = new ArrayList<>();
-        this.endIndexList = new ArrayList<>();
-        this.operations = new ArrayList<>();
-        this.parsing = new Parsing();
-        this.stringOperation = new StringOperation();
-
-    }
-
     public String getFunnyString() {
         String funnyString = "";
         int index = 0;
+
+        this.startIndexList = parsing.parseListOfIndexToken(startIndex);
+        this.endIndexList = parsing.parseListOfIndexToken(endIndex);
+        this.operations = parsing.parseListOfOperationToken(operation);
 
 
         for (int i = 0; i < startIndexList.size(); i++) {
@@ -35,7 +34,7 @@ public class StringFunifier {
             for (int j = index; j < start; j++) {
                 funnyString += boringString.charAt(j);
             }
-            funnyString += "(" + stringOperation.applyOperation(op,boringString,start,end)+ ")";
+            funnyString += "(" + stringOperation.applyOperation(op, boringString, start, end) + ")";
             index = end + 1;
         }
         for (int j = index; j < boringString.length(); j++) {
@@ -45,8 +44,14 @@ public class StringFunifier {
     }
 
     public String getFunRanges() {
+
         String funnyRange = "";
         int index = 0;
+
+        this.startIndexList = parsing.parseListOfIndexToken(startIndex);
+        this.endIndexList = parsing.parseListOfIndexToken(endIndex);
+        this.operations = parsing.parseListOfOperationToken(operation);
+
         for (int i = 0; i < startIndexList.size(); i++) {
             int start = startIndexList.get(i);
             int end = endIndexList.get(i);
@@ -75,31 +80,17 @@ public class StringFunifier {
         this.boringString = boringString;
     }
 
-    public List<Integer> getStartIndexList() {
-        return startIndexList;
+    public void setStartIndex(String startIndex) {
+        this.startIndex = startIndex;
     }
 
-    public void setStartIndexList(List<Integer> startIndexList) {
-
-        this.startIndexList =startIndexList;
+    public void setEndIndex(String endIndex) {
+        this.endIndex = endIndex;
     }
 
-    public List<Integer> getEndIndexList() {
-        return endIndexList;
+    public void setOperation(String operation) {
+        this.operation = operation;
     }
-
-    public void setEndIndexList(List<Integer> endIndexList) {
-        this.endIndexList =endIndexList;
-    }
-
-    public List<String> getOperations() {
-        return operations;
-    }
-
-    public void setOperations(List<String> operations) {
-        this.operations = operations;
-    }
-
 
     public void setStringOperation(IStringOperation stringOperation) {
         this.stringOperation = stringOperation;
@@ -107,6 +98,18 @@ public class StringFunifier {
 
     public void setParsing(IParsing parsing) {
         this.parsing = parsing;
+    }
+
+    public void setStartIndexList(List<Integer> startIndexList) {
+        this.startIndexList = startIndexList;
+    }
+
+    public void setEndIndexList(List<Integer> endIndexList) {
+        this.endIndexList = endIndexList;
+    }
+
+    public void setOperations(List<String> operations) {
+        this.operations = operations;
     }
 }
 
