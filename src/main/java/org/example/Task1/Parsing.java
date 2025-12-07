@@ -10,28 +10,32 @@ public class Parsing implements IParsing {
         List<Integer> inputList = new ArrayList<>();
         String[] Indx = tokenIndex.split(charSplit);
         for (String e : Indx) {
-            if (!e.isEmpty() && isNumber(e))
+            if (!e.isEmpty())
                 inputList.add(Integer.parseInt(e));
         }
         return inputList;
     }
 
     @Override
-    public List<String> parseListOfOperationToken(String token) {
-        List<String> opList = new ArrayList<>();
-        String[] Indx = token.replace(" ", "").split(charSplit);
-        for (String e : Indx) {
-            if (!e.isEmpty()) opList.add(e);
+    public List<Operations> parseListOfOperationToken(String token) {
+        List<Operations> opList = new ArrayList<>();
+        String[] operation = token.replace("\"", "").split(charSplit);
+        for (String s : operation) {
+            if (!s.isEmpty()) {
+                Operations op = Operations.valueOf(s.toUpperCase());
+                opList.add(op);
+            }
+
         }
         return opList;
     }
 
-    private boolean isNumber(String s) {
-        try {
-            Integer.parseInt(s);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
+//    private boolean isNumber(String s) {
+//        try {
+//            Integer.parseInt(s);
+//            return true;
+//        } catch (NumberFormatException e) {
+//            return false;
+//        }
+//    }
 }

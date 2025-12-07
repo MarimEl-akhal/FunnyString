@@ -5,17 +5,24 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        StringFunifier funnyString = new StringFunifier();
+        IParsing parsing = new Parsing();
 
-        funnyString.setBoringString(in.nextLine());
-        funnyString.setStartIndex(in.nextLine());
-        funnyString.setEndIndex(in.nextLine());
-        funnyString.setOperation(in.nextLine());
+        String booringString = in.nextLine();
+        String startIndices = in.nextLine();
+        String endIndices = in.nextLine();
+        String operations = in.nextLine();
 
-        funnyString.setParsing(new Parsing());
-        funnyString.setStringOperation(new StringOperation());
+        StringFunifier funnyString = new StringFunifier(
+                booringString,
+                parsing.parseListOfIndexToken(startIndices),
+                parsing.parseListOfIndexToken(endIndices),
+                parsing.parseListOfOperationToken(operations)
+        );
+
 
         //System.out.println("getFunnyRanges() => " + funnyString.getFunRanges());
+        System.out.println(funnyString.getBoringString());
+        System.out.println(funnyString.getFunRanges());
         System.out.println(funnyString.getFunnyString());
 
 
