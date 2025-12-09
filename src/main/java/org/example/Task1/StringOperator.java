@@ -51,7 +51,6 @@ public class StringOperator {
             case Operations.SORT -> sort(input);
             case Operations.COMPRESSION -> runLengthEncoding(input);
 
-            default -> throw new IllegalStateException("Unexpected value: " + op);
         };
     }
 

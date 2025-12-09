@@ -7,24 +7,25 @@ public class Main {
         Scanner in = new Scanner(System.in);
         IParsing parsing = new Parsing();
 
-        String booringString = in.nextLine();
+        String boringString = in.nextLine();
         String startIndices = in.nextLine();
         String endIndices = in.nextLine();
         String operations = in.nextLine();
 
-        StringFunifier funnyString = new StringFunifier(
-                booringString,
+        // id, output funnyString, output funRanges
+
+        StringFunifier funnyString = new StringFunifier();
+
+
+        System.out.println(boringString);
+        System.out.println(funnyString.getFunRanges(boringString,
+                parsing.parseListOfIndexToken(startIndices),
+                parsing.parseListOfIndexToken(endIndices))
+        );
+        System.out.println(funnyString.getFunnyString(boringString,
                 parsing.parseListOfIndexToken(startIndices),
                 parsing.parseListOfIndexToken(endIndices),
-                parsing.parseListOfOperationToken(operations)
-        );
-
-
-        //System.out.println("getFunnyRanges() => " + funnyString.getFunRanges());
-        System.out.println(funnyString.getBoringString());
-        System.out.println(funnyString.getFunRanges());
-        System.out.println(funnyString.getFunnyString());
-
+                parsing.parseListOfOperationToken(operations)));
 
     }
 }

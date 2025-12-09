@@ -22,8 +22,12 @@ public class Parsing implements IParsing {
         String[] operation = token.replace("\"", "").split(charSplit);
         for (String s : operation) {
             if (!s.isEmpty()) {
-                Operations op = Operations.valueOf(s.toUpperCase());
-                opList.add(op);
+                try{
+                    Operations op = Operations.valueOf(s.toUpperCase());
+                    opList.add(op);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
             }
 
         }
