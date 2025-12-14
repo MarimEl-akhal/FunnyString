@@ -1,15 +1,15 @@
-package org.example.Task1;
+package org.example;
 
 import java.util.Arrays;
 
 public class StringOperator {
 
     private String reverse(String input) {
-        String rev = "";
+        StringBuilder rev = new StringBuilder();
         for (int i = input.length() - 1; i >= 0; i--) {
-            rev += input.charAt(i);
+            rev.append(input.charAt(i));
         }
-        return rev;
+        return rev.toString();
     }
 
     private String upperCase(String input) {
@@ -23,13 +23,13 @@ public class StringOperator {
     private String sort(String input) {
         char[] ch = input.toCharArray();
         Arrays.sort(ch);
-        String sorted = "";
-        for (char c : ch) sorted += c;
-        return sorted;
+        StringBuilder sorted = new StringBuilder();
+        for (char c : ch) sorted.append(c);
+        return sorted.toString();
     }
 
     private String runLengthEncoding(String input) {
-        String comp = "";
+        StringBuilder comp = new StringBuilder();
         for (int i = 0; i < input.length(); i++) {
             int count = 1;
             while (i < input.length() - 1
@@ -38,9 +38,9 @@ public class StringOperator {
                 i++;
             }
 
-            comp += input.charAt(i) + "" + count;
+            comp.append(input.charAt(i)).append(count);
         }
-        return comp;
+        return comp.toString();
     }
 
     public String applyOperation(Operations op, String input) {

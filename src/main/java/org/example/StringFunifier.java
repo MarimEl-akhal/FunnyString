@@ -1,19 +1,19 @@
-package org.example.Task1;
+package org.example;
 
 import java.util.List;
 
 public class StringFunifier {
 
-    private StringOperator stringOperator;
+    private final StringOperator stringOperator;
 
     public StringFunifier(
     ) {
-        this.stringOperator = Factory.getDependency(StringOperator.class);
+        this.stringOperator = FactoryDependency.getDependency(StringOperator.class);
     }
 
     public String getFunnyString(String boring, List<Integer> startIndexList, List<Integer> endIndexList, List<Operations> operations) {
 
-        String funnyString = "";
+        StringBuilder funnyString = new StringBuilder();
         int index = 0;
 
         for (int i = 0; i < startIndexList.size(); i++) {
@@ -22,41 +22,41 @@ public class StringFunifier {
             Operations op = operations.get(i);
 
             for (int j = index; j < start; j++) {
-                funnyString += boring.charAt(j);
+                funnyString.append(boring.charAt(j));
             }
 
-            funnyString += "(" + this.stringOperator.applyOperation(op, boring.substring(start, end + 1)) + ")";
+            funnyString.append("(").append(this.stringOperator.applyOperation(op, boring.substring(start, end + 1))).append(")");
             index = end + 1;
         }
         for (int j = index; j < boring.length(); j++) {
-            funnyString += boring.charAt(j);
+            funnyString.append(boring.charAt(j));
         }
-        return funnyString;
+        return funnyString.toString();
     }
 
-    public String getFunRanges(String boring, List<Integer> startIndexList, List<Integer> endIndexList) {
+    public String getFunRanges(String boring, List<Integer> startIndexList, List<Integer> endIndexList ) {
 
-        String funnyRange = "";
+        StringBuilder funnyRange = new StringBuilder();
         int index = 0;
 
         for (int i = 0; i < startIndexList.size(); i++) {
             int start = startIndexList.get(i);
             int end = endIndexList.get(i);
             for (int j = index; j < start; j++) {
-                funnyRange += boring.charAt(j);
+                funnyRange.append(boring.charAt(j));
             }
-            funnyRange += "(";
+            funnyRange.append("(");
             for (int j = start; j <= end; j++) {
-                funnyRange += boring.charAt(j);
+                funnyRange.append(boring.charAt(j));
             }
-            funnyRange += ")";
+            funnyRange.append(")");
             index = end + 1;
         }
         for (int j = index; j < boring.length(); j++) {
-            funnyRange += boring.charAt(j);
+            funnyRange.append(boring.charAt(j));
         }
 
-        return funnyRange;
+        return funnyRange.toString();
     }
 
 }
