@@ -6,7 +6,7 @@ public class FactoryDependency {
         if (className == StringOperator.class) {
             return (T) new StringOperator();
         }
-        if (className == DataBaseConnection.class ){
+        if (className == DataBaseConnection.class) {
             return (T) new DataBaseConnection();
         }
         return null;

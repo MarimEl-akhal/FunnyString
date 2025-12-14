@@ -9,18 +9,14 @@ public class Main {
     public static void main(String[] args) throws SQLException {
         Scanner in = new Scanner(System.in);
         IParsing parsing = new Parsing();
+        StringFunifier funnyString = new StringFunifier();
+        JdbcStatementLogic jdbcStatementLogic = new JdbcStatementLogic();
 
         while (true) {
             String boringString = in.nextLine();
             String startIndices = in.nextLine();
             String endIndices = in.nextLine();
             String operations = in.nextLine();
-
-            // id, output funnyString, output funRanges
-
-            StringFunifier funnyString = new StringFunifier();
-            JdbcStatementLogic jdbcStatementLogic = new JdbcStatementLogic();
-
 
             List<Integer> startList = parsing.parseListOfIndexToken(startIndices);
             List<Integer> endList = parsing.parseListOfIndexToken(endIndices);
@@ -30,7 +26,7 @@ public class Main {
             String funRanges = funnyString.getFunRanges(boringString, startList, endList);
             String stringFunny = funnyString.getFunnyString(boringString, startList, endList, opsList);
 
-            jdbcStatementLogic.Input_Output_Strings(boringString, funRanges, stringFunny, startList, endList, opsList);
+            jdbcStatementLogic.Input_Output_Strings(boringString, startList, endList, opsList, funRanges, stringFunny);
 
 
             System.out.println("Inserted into database successfully.");

@@ -13,7 +13,7 @@ public class JdbcStatementLogic {
         this.dbConnection = FactoryDependency.getDependency(DataBaseConnection.class);
     }
 
-    public void Input_Output_Strings(String boringString, String funRanges, String funnyString, List<Integer> startIndexList, List<Integer> endIndexList, List<Operations> operationsList) throws SQLException {
+    public void Input_Output_Strings(String boringString, List<Integer> funRanges, List<Integer> funnyString, List<Operations> startIndexList, String endIndexList, String operationsList) throws SQLException {
         String strQuery = "INSERT INTO STRINGS (boringString,funRanges,funnyString) VALUES (?,?,?)";
         PreparedStatement pstmt = getConnection().prepareStatement(strQuery, Statement.RETURN_GENERATED_KEYS);
 
