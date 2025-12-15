@@ -40,6 +40,8 @@ public class JdbcStatementLogic {
             stmt.executeUpdate();
         }
 
+        dbConnection.closeConnection();
+
     }
 
 
