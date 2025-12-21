@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: app
+  datasource:
+    url: jdbc:mariadb://localhost:3306/funnystring?createDatabaseIfNotExist=true&useMysqlMetadata=true
+    username: root
+    password: 123
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database-platform: org.hibernate.dialect.MariaDBDialect
+    show-sql: true

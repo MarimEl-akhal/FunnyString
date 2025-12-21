@@ -1,6 +1,6 @@
 package org.example.enumm;
 
-public enum Operations {
+public enum Operation {
     REVERSE,
     SORT,
     COMPRESSION,
