@@ -1,8 +1,12 @@
 package org.example;
 
+import org.example.factory.DataBaseConnectionFactory;
+import org.example.factory.FactoryDependency;
+
 import java.sql.*;
 import java.util.List;
 
+import static org.example.DataBaseConnection.closeConnection;
 import static org.example.DataBaseConnection.getConnection;
 
 public class JdbcStatementLogic {
@@ -14,7 +18,7 @@ public class JdbcStatementLogic {
     }
 
 
-    public void Input_Output_Strings(String boringString, List<Integer>startIndexList , List<Integer> endIndexList , List<Operations> operationsList , String funRanges, String funnyString) throws SQLException {
+    public void insertionData(String boringString, List<Integer> startIndexList, List<Integer> endIndexList, List<Operation> operationsList, String funRanges, String funnyString) throws SQLException {
         String strQuery = "INSERT INTO STRINGS (boringString,funRanges,funnyString) VALUES (?,?,?)";
         PreparedStatement pstmt = getConnection().prepareStatement(strQuery, Statement.RETURN_GENERATED_KEYS);
 
@@ -40,7 +44,7 @@ public class JdbcStatementLogic {
             stmt.executeUpdate();
         }
 
-        dbConnection.closeConnection();
+        closeConnection();
 
     }
 

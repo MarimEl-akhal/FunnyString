@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.factory.FactoryDependency;
+
 import java.util.List;
 
 public class StringFunifier {
@@ -11,7 +13,7 @@ public class StringFunifier {
         this.stringOperator = FactoryDependency.getDependency(StringOperator.class);
     }
 
-    public String getFunnyString(String boring, List<Integer> startIndexList, List<Integer> endIndexList, List<Operations> operations) {
+    public String getFunnyString(String boring, List<Integer> startIndexList, List<Integer> endIndexList, List<Operation> operations) {
 
         StringBuilder funnyString = new StringBuilder();
         int index = 0;
@@ -19,7 +21,7 @@ public class StringFunifier {
         for (int i = 0; i < startIndexList.size(); i++) {
             int start = startIndexList.get(i);
             int end = endIndexList.get(i);
-            Operations op = operations.get(i);
+            Operation op = operations.get(i);
 
             for (int j = index; j < start; j++) {
                 funnyString.append(boring.charAt(j));
@@ -34,7 +36,7 @@ public class StringFunifier {
         return funnyString.toString();
     }
 
-    public String getFunRanges(String boring, List<Integer> startIndexList, List<Integer> endIndexList ) {
+    public String getFunRanges(String boring, List<Integer> startIndexList, List<Integer> endIndexList) {
 
         StringBuilder funnyRange = new StringBuilder();
         int index = 0;

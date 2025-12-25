@@ -17,7 +17,7 @@ public class DataBaseConnection {
         } else {
             try {
                 connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
-                System.out.println("Connection established.");
+                System.out.println("DataBase is connection established.");
                 return connection;
             } catch (SQLException e) {
                 System.out.println("Start Connection failed");
@@ -31,7 +31,7 @@ public class DataBaseConnection {
         try {
             if (connection != null && !connection.isClosed()) {
                 connection.close();
-                System.out.println("connection closed");
+                System.out.println("Database connection is closed");
             }
         } catch (SQLException e) {
             System.out.println("Closing Connection failed");

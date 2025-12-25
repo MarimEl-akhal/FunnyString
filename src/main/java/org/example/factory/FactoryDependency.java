@@ -1,63 +1,34 @@
-package org.example;
+package org.example.factory;
 
-import jdk.dynalink.beans.StaticClass;
-import org.checkerframework.checker.units.qual.C;
+import org.example.*;
+import org.example.socket_v2.ClientHandler;
+import org.example.socket_v2.ServerHandler;
+
 
 public class FactoryDependency {
-    private static StringOperator operator;
-    private static DataBaseConnection dbConnection;
-    private static StringFunifier stringFunifier;
-    private static Parsing parsing;
-    private static JdbcStatementLogic jdbcStatementLogic;
-    private static ClientRequest client;
-    private static ServerResponse response;
-
-    private static Server2 server;
-    private static Client2 client2;
-
     public static <T> T getDependency(Class<T> className) {
+
         if (className == StringOperator.class) {
-            if (operator == null) {
-                operator = new StringOperator();
-            }
-            return (T) operator;
+            return (T) new StringOperatorFactory().createInstance();
+        } else if (className == DataBaseConnection.class) {
+            return (T)  new DataBaseConnectionFactory().createInstance();
         }
-        if (className == DataBaseConnection.class) {
-            if (dbConnection == null) {
-                dbConnection = new DataBaseConnection();
-            }
-            return (T) dbConnection;
+        else if (className == StringFunifier.class) {
+            return (T)  new StringFunifierFactory().createInstance();
         }
-        if (className == StringFunifier.class) {
-            if (stringFunifier == null) {
-                stringFunifier = new StringFunifier();
-            }
-            return (T) stringFunifier;
+       else if (className == Parsing.class) {
+            return (T)  new ParsingFactory().createInstance();
         }
-        if (className == Parsing.class) {
-            if (parsing == null) {
-                parsing = new Parsing();
-            }
-            return (T) parsing;
+        else if (className == JdbcStatementLogic.class) {
+            return (T)  new JdbcStatementLogicFactory().createInstance();
         }
-        if (className == JdbcStatementLogic.class) {
-            if (jdbcStatementLogic == null) {
-                jdbcStatementLogic = new JdbcStatementLogic();
-            }
-            return (T) jdbcStatementLogic;
+        else if (className == ClientHandler.class) {
+            return (T)  new ClientHandlerFactory().createInstance();
         }
-        if (className == ClientRequest.class) {
-            if (client == null) {
-                client = new ClientRequest();
-            }
-            return (T) client;
+        else if (className == ServerHandler.class) {
+            return (T)  new ServerHandlerFactory().createInstance();
         }
-        if (className == ServerResponse.class) {
-            if (response == null) {
-                response = new ServerResponse();
-            }
-            return (T) response;
-        }
+
         return null;
     }
 }

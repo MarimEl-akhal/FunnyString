@@ -43,13 +43,13 @@ public class StringOperator {
         return comp.toString();
     }
 
-    public String applyOperation(Operations op, String input) {
+    public String applyOperation(Operation op, String input) {
         return switch (op) {
-            case Operations.REVERSE -> reverse(input);
-            case Operations.UPPERCASE -> upperCase(input);
-            case Operations.LOWERCASE -> lowerCase(input);
-            case Operations.SORT -> sort(input);
-            case Operations.COMPRESSION -> runLengthEncoding(input);
+            case REVERSE -> reverse(input);
+            case UPPERCASE -> upperCase(input);
+            case LOWERCASE -> lowerCase(input);
+            case SORT -> sort(input);
+            case COMPRESSION -> runLengthEncoding(input);
 
         };
     }
