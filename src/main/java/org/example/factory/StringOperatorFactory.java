@@ -2,9 +2,14 @@ package org.example.factory;
 
 import org.example.StringOperator;
 
-public class StringOperatorFactory implements BaseFactory<StringOperator>{
+public class StringOperatorFactory implements BaseFactory<StringOperator> {
+    private StringOperator stringOperator;
+
     @Override
     public StringOperator createInstance() {
-        return new StringOperator();
+        if (stringOperator == null) {
+            return new StringOperator();
+        }
+        return stringOperator;
     }
 }

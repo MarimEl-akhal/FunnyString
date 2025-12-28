@@ -1,58 +1,66 @@
-package org.example.socket_v2;
+package org.example.socket_v2.client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class ServerHandler {
+    private final Socket clientSocket;
+    private final BufferedReader in, input;
+    private final PrintWriter out;
 
-    private Socket clientSocket;
 
-
-    public ServerHandler() {
-    }
-
-    public ServerHandler(Socket socket) {
+    public ServerHandler(Socket socket) throws IOException {
         this.clientSocket = socket;
+        this.in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())); //input from server
+        this.input = new BufferedReader(new InputStreamReader(System.in)); // we ready the input reader from console
+        this.out = new PrintWriter(clientSocket.getOutputStream(), true); // the output that is connected to server
+
     }
 
-    public void handle() {
+    public void handle() throws IOException {
+        Scanner sc = new Scanner(System.in);
         while (true) {
-            try {
-                BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())); //input from server
-                BufferedReader input = new BufferedReader(new InputStreamReader(System.in)); // we ready the input reader from console
-                PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true); // the output that is connected to server
+            String boringString = sc.nextLine();
+            out.println(boringString);
+
+            String startIndices = sc.nextLine();
+            out.println(startIndices);
+
+            String endIndices = sc.nextLine();
+            out.println(endIndices);
+
+            String operations = sc.nextLine();
+            out.println(operations);
+
+            String res1 = in.readLine();
+
+            String res2 = in.readLine();
+
+            String res3 = in.readLine();
+
+            System.out.println(res1);
+            System.out.println(res2);
+
+            System.out.println(res3);
 
 
-                String boringString = input.readLine();
-                out.println(boringString);
 
-                String startIndices = input.readLine();
-                out.println(startIndices);
+            //read output from server
+//                String line;
+//                while ((line = in.readLine()) != null) {
+//                    System.out.println(line);
+//                }
+//
+//
+//                in.close();
+//                input.close();
+//                out.close();
+//                clientSocket.close();
 
-                String endIndices = input.readLine();
-                out.println(endIndices);
-
-                String operations = input.readLine();
-                out.println(operations);
-
-                //read output from server
-                String line;
-                while ((line = in.readLine()) != null) {
-                    System.out.println(line);
-                }
-
-
-                in.close();
-                input.close();
-                out.close();
-                clientSocket.close();
-
-            } catch (IOException e) {
-                System.err.println(e);
-            }
         }
     }
 }

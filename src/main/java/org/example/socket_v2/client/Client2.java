@@ -1,4 +1,4 @@
-package org.example.socket_v2;
+package org.example.socket_v2.client;
 
 import org.example.factory.FactoryDependency;
 
@@ -12,10 +12,9 @@ public class Client2 {
 
 
     public Client2(String ip, int port) {
-        this.serverHandler = FactoryDependency.getDependency(ServerHandler.class);
         try {
             clientSocket = new Socket(ip, port);
-            System.out.println("connected");
+            System.out.println("Client connected");
             serverHandler = new ServerHandler(clientSocket);
             serverHandler.handle();
 

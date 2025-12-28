@@ -1,8 +1,8 @@
 package org.example.factory;
 
 import org.example.*;
-import org.example.socket_v2.ClientHandler;
-import org.example.socket_v2.ServerHandler;
+import org.example.socket_v2.server.ClientHandler;
+import org.example.socket_v2.client.ServerHandler;
 
 
 public class FactoryDependency {
@@ -22,12 +22,12 @@ public class FactoryDependency {
         else if (className == JdbcStatementLogic.class) {
             return (T)  new JdbcStatementLogicFactory().createInstance();
         }
-        else if (className == ClientHandler.class) {
-            return (T)  new ClientHandlerFactory().createInstance();
-        }
-        else if (className == ServerHandler.class) {
-            return (T)  new ServerHandlerFactory().createInstance();
-        }
+//        else if (className == ClientHandler.class) {
+//            return (T)  new ClientHandlerFactory().createInstance();
+//        }
+//        else if (className == ServerHandler.class) {
+//            return (T)  new ServerHandlerFactory().createInstance();
+//        }
 
         return null;
     }

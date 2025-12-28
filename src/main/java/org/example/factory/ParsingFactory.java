@@ -4,8 +4,13 @@ import org.example.IParsing;
 import org.example.Parsing;
 
 public class ParsingFactory implements BaseFactory<IParsing> {
+    private IParsing parsing;
+
     @Override
     public IParsing createInstance() {
-        return  new Parsing();
+        if (parsing == null) {
+            return new Parsing();
+        }
+        return parsing;
     }
 }
