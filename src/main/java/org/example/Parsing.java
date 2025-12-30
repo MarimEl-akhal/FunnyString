@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.operator.Operation;
+
 import java.util.*;
 
 public class Parsing implements IParsing  {
@@ -32,5 +34,12 @@ public class Parsing implements IParsing  {
 
         }
         return opList;
+    }
+
+    @Override
+    public void completeParsing(String startIndices, String endIndices, String operations) {
+        parseListOfIndexToken(startIndices);
+        parseListOfIndexToken(endIndices);
+        parseListOfOperationToken(operations);
     }
 }

@@ -1,4 +1,4 @@
-package org.example;
+package org.example.operator;
 
 import java.util.Arrays;
 

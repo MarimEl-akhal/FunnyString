@@ -1,6 +1,7 @@
 package org.example.socket_v2.server;
 
 import org.example.*;
+import org.example.database.DataBaseManager;
 import org.example.factory.FactoryDependency;
 
 import java.io.BufferedReader;
@@ -8,7 +9,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.List;
+import java.sql.SQLException;
 
 public class ClientHandler extends Thread {
 
@@ -17,8 +18,11 @@ public class ClientHandler extends Thread {
     private final BufferedReader in;
 
 
+    private final ClientRequest clientRequest;
+
     private final IParsing parsing;
     private final StringFunifier funnyString;
+    private final DataBaseManager dbManager;
 
 
     public ClientHandler(Socket socket) throws IOException {
@@ -29,8 +33,12 @@ public class ClientHandler extends Thread {
         // Takes input from the client socket
         this.in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
+        this.clientRequest = FactoryDependency.getDependency(ClientRequest.class);
+
         this.parsing = FactoryDependency.getDependency(Parsing.class);
         this.funnyString = FactoryDependency.getDependency(StringFunifier.class);
+        this.dbManager = FactoryDependency.getDependency(DataBaseManager.class);
+
     }
 
 
@@ -42,41 +50,40 @@ public class ClientHandler extends Thread {
                 String startIndices = in.readLine();
                 String endIndices = in.readLine();
                 String operations = in.readLine();
-
-                System.out.println(boringString);
-                System.out.println(startIndices);
-                System.out.println(endIndices);
-                System.out.println(operations);
+                ClientOption option = ClientOption.valueOf(in.readLine());
 
 
-                List<Integer> startList = parsing.parseListOfIndexToken(startIndices);
-                List<Integer> endList = parsing.parseListOfIndexToken(endIndices);
-                List<Operation> opsList = parsing.parseListOfOperationToken(operations);
 
-                String funRanges = funnyString.getFunRanges(boringString, startList, endList);
-                String stringFunny = funnyString.getFunnyString(boringString, startList, endList, opsList);
+//
+                String stringFunny = "";
+                String funRange = "";
 
-
-                System.out.println("boring String : " + boringString);
-                System.out.println("Fun Ranges: " + funRanges);
-                System.out.println("Funny String: " + stringFunny);
+                switch (option) {
+                    case FUNRANGE:
+                        funRange = funnyString.getFunRanges(boringString, parsing.parseListOfIndexToken(startIndices), parsing.parseListOfIndexToken(endIndices));
+                        dbManager.insertFunnyString(boringString, funRange, null);
+                        dbManager.insertOperationRange(parsing.parseListOfIndexToken(startIndices), parsing.parseListOfIndexToken(endIndices), parsing.parseListOfOperationToken(operations));
+                        break;
+                    case FUNNYSTRING:
+                        stringFunny = funnyString.getFunnyString(boringString, parsing.parseListOfIndexToken(startIndices), parsing.parseListOfIndexToken(endIndices), parsing.parseListOfOperationToken(operations));
+                        dbManager.insertFunnyString(boringString, null, stringFunny);
+                        dbManager.insertOperationRange(parsing.parseListOfIndexToken(startIndices), parsing.parseListOfIndexToken(endIndices), parsing.parseListOfOperationToken(operations));
+                        break;
+//
+//                    case GET_FUNRANGE:
+//                        id = get id;
+//                        createFunStringEntity
+//                                dbManager.get(FunStringEntity);
+//                        send to user the data;
+                }
+//
 
                 out.println("boring String : " + boringString);
-                out.println("Fun Ranges: " + funRanges);
-                out.println("Funny String: " + stringFunny);
+//                out.println("Fun Ranges: " + funRange);
+//                out.println("Funny String: " + stringFunny);
 
-                System.out.println("here here here");
-//                String line = in.readLine();
-//                while ((line) != null) {
-//                    out.println(line);
-//                }
-
-//                System.out.println("Closing Connection");
-//                in.close();
-//                out.close();
-//                clientSocket.close();
             }
-        } catch (IOException e) {
+        } catch (IOException | SQLException e) {
             System.err.println(e);
         }
 
