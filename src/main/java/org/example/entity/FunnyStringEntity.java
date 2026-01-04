@@ -3,6 +3,11 @@ package org.example.entity;
 public class FunnyStringEntity {
 
     private long id;
+
+    public long getId() {
+        return id;
+    }
+
     private String boringString;
     private String funnyString;
     private String funRange;

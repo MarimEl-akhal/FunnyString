@@ -1,6 +1,6 @@
 package org.example.dto;
 
-public class FunnyStringEntityRequest {
+public class FunnyStringEntityResponse {
     private String boringString;
     private String funnyString;
     private String funRange;
