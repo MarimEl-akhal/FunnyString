@@ -1,7 +1,7 @@
 package org.example.mapper;
 
+import org.example.dto.FunnyStringEntityRequest;
 import org.example.entity.FunnyStringEntity;
-import org.example.entity.FunnyStringEntityRequest;
 
 public class FunnyStringEntityMapper {
 

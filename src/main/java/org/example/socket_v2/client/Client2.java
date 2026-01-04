@@ -1,7 +1,5 @@
 package org.example.socket_v2.client;
 
-import org.example.factory.FactoryDependency;
-
 import java.io.IOException;
 import java.net.Socket;
 

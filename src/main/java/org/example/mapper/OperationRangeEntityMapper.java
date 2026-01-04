@@ -1,8 +1,8 @@
 package org.example.mapper;
 
 
+import org.example.dto.OperationRangeEntityRequest;
 import org.example.entity.OperationRangeEntity;
-import org.example.entity.OperationRangeEntityRequest;
 import org.example.factory.FactoryDependency;
 import org.example.parsingg.Parsing;
 
@@ -20,12 +20,12 @@ public class OperationRangeEntityMapper {
     public List<OperationRangeEntity> toEntity(OperationRangeEntityRequest operationRangeEntityRequest, long funnyStringId) {
         List<OperationRangeEntity> operationRangeEntities = new ArrayList<>();
 
-        for (int i = 0; i < operationRangeEntityRequest.getStartIndex().size(); i++) {
+        for (int i = 0; i < operationRangeEntityRequest.getStartIndices().size(); i++) {
             OperationRangeEntity operationRangeEntity = new OperationRangeEntity();
-            operationRangeEntity.setStartIndex(operationRangeEntityRequest.getStartIndex().get(i));
-            operationRangeEntity.setEndIndex(operationRangeEntityRequest.getEndIndex().get(i));
-            if (operationRangeEntityRequest.getOperation() != null) {
-                operationRangeEntity.setOperation(operationRangeEntityRequest.getOperation().get(i).name());
+            operationRangeEntity.setStartIndex(operationRangeEntityRequest.getStartIndices().get(i));
+            operationRangeEntity.setEndIndex(operationRangeEntityRequest.getEndIndices().get(i));
+            if (operationRangeEntityRequest.getOperations() != null) {
+                operationRangeEntity.setOperation(operationRangeEntityRequest.getOperations().get(i).name());
             } else {
                 operationRangeEntity.setOperation(null);
             }

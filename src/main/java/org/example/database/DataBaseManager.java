@@ -11,12 +11,6 @@ public class DataBaseManager<T> implements DataBaseManagerInterface<T> {
     private static final String USER_NAME = "root";
     private static final String PASSWORD = "123";
     private static Connection connection;
-
-
-    public long getFunnyId() {
-        return funnyId;
-    }
-
     private long funnyId = 0;
 
     public static Connection getConnection() {
@@ -35,6 +29,9 @@ public class DataBaseManager<T> implements DataBaseManagerInterface<T> {
         }
     }
 
+    public long getFunnyId() {
+        return funnyId;
+    }
 
     @Override
     public T getById(long id, Class<T> clazz) throws InvocationTargetException, InstantiationException, IllegalAccessException {

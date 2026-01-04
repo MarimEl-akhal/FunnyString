@@ -2,7 +2,8 @@ package org.example.parsingg;
 
 import org.example.operator.Operation;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Parsing implements IParsing {
     private final String charSplit = "\\s*,\\s*";

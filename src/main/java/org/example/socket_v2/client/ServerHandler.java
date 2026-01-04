@@ -9,14 +9,13 @@ import java.util.Scanner;
 
 public class ServerHandler {
     private final Socket clientSocket;
-    private final BufferedReader in, input;
+    private final BufferedReader in;
     private final PrintWriter out;
 
 
     public ServerHandler(Socket socket) throws IOException {
         this.clientSocket = socket;
         this.in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())); //input from server
-        this.input = new BufferedReader(new InputStreamReader(System.in)); // we ready the input reader from console
         this.out = new PrintWriter(clientSocket.getOutputStream(), true); // the output that is connected to server
 
     }
@@ -24,15 +23,11 @@ public class ServerHandler {
     public void handle() throws IOException {
         Scanner sc = new Scanner(System.in);
         while (true) {
-
-            System.out.println("enter option:  ");
             String option = sc.nextLine().toUpperCase();
             out.println(option);
-          //  System.out.println(option);
-
 
             switch (option) {
-                case "FUNRANGE":{
+                case "FUNRANGE": {
                     String boringString = sc.nextLine();
                     out.println(boringString);
 
@@ -79,7 +74,7 @@ public class ServerHandler {
                     break;
                 }
                 case "GET_FUNRANGEBYID": {
-                    System.out.println("enter id : ");
+//                    System.out.println("enter id : ");
                     String id = sc.nextLine();
                     out.println(id);
 

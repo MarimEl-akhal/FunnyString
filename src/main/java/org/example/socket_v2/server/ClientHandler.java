@@ -22,7 +22,6 @@ public class ClientHandler extends Thread {
         try {
             while (true) {
 
-
                 ClientRequest clientRequest = new ClientRequest(clientSocket);
                 clientRequest.chooseClientOperation();
 
