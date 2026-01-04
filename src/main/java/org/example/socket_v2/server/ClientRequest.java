@@ -106,6 +106,7 @@ public class ClientRequest {
                 funnyStringEntityResponse.setBoringString(boringString);
                 funnyStringEntityResponse.setFunnyString(stringFunny);
 
+
                 funnyStringEntity = funnyStringEntityMapper.toEntity(funnyStringEntityResponse);
                 dbManager.insert(funnyStringEntity);
                 long funny_id = dbManager.getFunnyId();

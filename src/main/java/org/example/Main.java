@@ -9,28 +9,25 @@ import org.example.parsingg.IParsing;
 import org.example.parsingg.Parsing;
 import org.example.socket_v2.server.ClientOption;
 
-import java.io.IOException;
+
 import java.lang.reflect.InvocationTargetException;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
 
 public class Main {
-    public static void main(String[] args) throws SQLException, InvocationTargetException, InstantiationException, IllegalAccessException, IOException {
+    public static void main(String[] args) throws InvocationTargetException, InstantiationException, IllegalAccessException {
         Scanner in = new Scanner(System.in);
         IParsing parsing = FactoryDependency.getDependency(Parsing.class);
         StringFunifier funnyString = FactoryDependency.getDependency(StringFunifier.class);
         DataBaseManager dbManager = FactoryDependency.getDependency(DataBaseManager.class);
-        FunnyStringEntity funnyStringEntity = FactoryDependency.getDependency(FunnyStringEntity.class);
-        OperationRangeEntity operationRange = FactoryDependency.getDependency(OperationRangeEntity.class);
 
-//        FunnyStringEntity funnyStringEntity = new FunnyStringEntity();
+//        FunnyStringEntity funnyStringEntity = FactoryDependency.getDependency(FunnyStringEntity.class);
+//        OperationRangeEntity operationRange = FactoryDependency.getDependency(OperationRangeEntity.class);
 
-//        OperationRangeEntity operationRange = new OperationRangeEntity();
+                FunnyStringEntity funnyStringEntity = new FunnyStringEntity();
 
-
-
+        OperationRangeEntity operationRange = new OperationRangeEntity();
 
         while (true) {
             ClientOption option = ClientOption.valueOf(in.nextLine().toUpperCase());
@@ -46,13 +43,13 @@ public class Main {
 
                     String funRanges = funnyString.getFunRanges(boringString, startList, endList);
 
-//                    FunnyStringEntity funnyStringEntity = null;
                     funnyStringEntity.setBoringString(boringString);
                     funnyStringEntity.setFunRange(funRanges);
+//                    funnyStringEntity.setFunnyString(null);
+
                     dbManager.insert(funnyStringEntity);
 
                     long funny_Id = dbManager.getFunnyId();
-//                    OperationRangeEntity operationRange = null;
                     for (int i = 0; i < startList.size(); i++) {
                         operationRange.setStartIndex(startList.get(i));
                         operationRange.setEndIndex(endList.get(i));
@@ -60,7 +57,7 @@ public class Main {
                     operationRange.setFunnyStringId(funny_Id);
                     dbManager.insert(operationRange);
 
-                    System.out.println("Inserted into database successfully.");
+//                    System.out.println("Inserted into database successfully.");
                     System.out.println("boring String : " + funnyStringEntity.getBoringString());
                     System.out.println("Fun Ranges: " + funnyStringEntity.getFunRange());
                     System.out.println("Funny String: " + funnyStringEntity.getFunnyString());
@@ -78,14 +75,14 @@ public class Main {
                     List<Operation> opsList = parsing.parseListOfOperationToken(operations);
 
                     String stringFunny = funnyString.getFunnyString(boringString, startList, endList, opsList);
-//                    FunnyStringEntity funnyStringEntity = null;
+
                     funnyStringEntity.setBoringString(boringString);
                     funnyStringEntity.setFunnyString(stringFunny);
+//                    funnyStringEntity.setFunRange(null);
                     dbManager.insert(funnyStringEntity);
 
                     long funny_Id = dbManager.getFunnyId();
 
-//                    OperationRangeEntity operationRange = null;
                     for (int i = 0; i < startList.size(); i++) {
                         operationRange.setStartIndex(startList.get(i));
                         operationRange.setEndIndex(endList.get(i));
@@ -94,7 +91,7 @@ public class Main {
                     operationRange.setFunnyStringId(funny_Id);
                     dbManager.insert(operationRange);
 
-                    System.out.println("Inserted into database successfully.");
+//                    System.out.println("Inserted into database successfully.");
                     System.out.println("boring String : " + funnyStringEntity.getBoringString());
                     System.out.println("Fun Ranges: " + funnyStringEntity.getFunRange());
                     System.out.println("Funny String: " + funnyStringEntity.getFunnyString());
@@ -109,7 +106,7 @@ public class Main {
                         return;
                     }
 
-                    System.out.println("Inserted into database successfully.");
+//                    System.out.println("Inserted into database successfully.");
                     System.out.println("ID : " + funnyStringEntity.getId());
                     System.out.println("boring String : " + funnyStringEntity.getBoringString());
                     System.out.println("Fun Ranges: " + funnyStringEntity.getFunRange());
