@@ -6,13 +6,37 @@ public class FunnyStringEntity {
     private String boringString;
     private String funnyString;
     private String funRange;
+
+    public String getFunRange() {
+        return funRange;
+    }
+
+    public void setFunRange(String funRange) {
+        this.funRange = funRange;
+    }
+
+    public String getFunnyString() {
+        return funnyString;
+    }
+
+    public void setFunnyString(String funnyString) {
+        this.funnyString = funnyString;
+    }
+
+    public String getBoringString() {
+        return boringString;
+    }
+
+    public void setBoringString(String boringString) {
+        this.boringString = boringString;
+    }
+
 }
 
 
-/*CREATE TABLE funny_string (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    boringString VARCHAR(255) NOT NULL,
-    funnyString TEXT,
-    funRange TEXT
-);
-*/
+//CREATE TABLE funnystringentity (
+//    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+//    boringString TEXT NOT NULL,
+//    funnyString TEXT,
+//    funRange TEXT
+//);

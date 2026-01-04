@@ -2,13 +2,16 @@ package org.example.factory;
 
 import org.example.socket_v2.server.ClientRequest;
 
-public class ClientRequestFactory implements BaseFactory<ClientRequest>{
-    private  ClientRequest clientRequest;
+import java.io.IOException;
+import java.net.Socket;
+
+public class ClientRequestFactory implements BaseFactory<ClientRequest> {
+    private ClientRequest clientRequest;
 
     @Override
-    public ClientRequest createInstance() {
+    public ClientRequest createInstance() throws IOException {
         if (clientRequest == null) {
-            return new ClientRequest();
+            return new ClientRequest(new Socket());
         }
         return clientRequest;
     }

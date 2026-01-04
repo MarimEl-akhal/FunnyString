@@ -1,7 +1,7 @@
 package org.example.factory;
 
-import org.example.IParsing;
-import org.example.Parsing;
+import org.example.parsingg.IParsing;
+import org.example.parsingg.Parsing;
 
 public class ParsingFactory implements BaseFactory<IParsing> {
     private IParsing parsing;

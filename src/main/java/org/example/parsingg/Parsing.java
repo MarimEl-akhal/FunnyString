@@ -1,14 +1,14 @@
-package org.example;
+package org.example.parsingg;
 
 import org.example.operator.Operation;
 
 import java.util.*;
 
-public class Parsing implements IParsing  {
+public class Parsing implements IParsing {
     private final String charSplit = "\\s*,\\s*";
 
     @Override
-    public  List<Integer> parseListOfIndexToken(String tokenIndex) {
+    public List<Integer> parseListOfIndexToken(String tokenIndex) {
         List<Integer> inputList = new ArrayList<>();
         String[] Index = tokenIndex.split(charSplit);
         for (String e : Index) {

@@ -13,6 +13,10 @@ public class DataBaseManager<T> implements DataBaseManagerInterface<T> {
     private static Connection connection;
 
 
+    public long getFunnyId() {
+        return funnyId;
+    }
+
     private long funnyId = 0;
 
     public static Connection getConnection() {
@@ -52,7 +56,7 @@ public class DataBaseManager<T> implements DataBaseManagerInterface<T> {
         } catch (SQLException | NoSuchMethodException e) {
             throw new RuntimeException(e);
         }
-    return null;
+        return null;
     }
 
     @Override
@@ -64,26 +68,30 @@ public class DataBaseManager<T> implements DataBaseManagerInterface<T> {
             List<String> columnNames = new ArrayList<>();
             List<Object> values = new ArrayList<>();
             for (Field field : fields) {
-                    if (!field.getName().equals("id")) {
-                        field.setAccessible(true);
-                        columnNames.add(field.getName());
-                        values.add(field.get(entity));
-                    }
+                if (!field.getName().equals("id")) {
+                    field.setAccessible(true);
+                    columnNames.add(field.getName());
+                    values.add(field.get(entity));
+                }
             }
-            String columns = String.join(",",columnNames);
+
+            String columns = String.join(",", columnNames);
             String questionMarks = String.join(",", "?".repeat(values.size()).split(""));
             String insertQuery = "INSERT INTO " + tableName + "(" + columns + ") VALUES (" + questionMarks + ")";
             System.out.println(insertQuery);
-            PreparedStatement preparedStatement = getConnection().prepareStatement(insertQuery,Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement preparedStatement = getConnection().prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
             for (int i = 0; i < values.size(); i++) {
                 preparedStatement.setObject(i + 1, values.get(i));
             }
+            System.out.println(values);
             preparedStatement.executeUpdate();
 
             ResultSet keys = preparedStatement.getGeneratedKeys();
             if (keys.next()) {
                 funnyId = keys.getLong(1);
             }
+
+//            closeConnection();
 
         } catch (SQLException | IllegalAccessException e) {
             throw new RuntimeException(e);

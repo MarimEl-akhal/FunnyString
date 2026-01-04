@@ -24,20 +24,60 @@ public class ServerHandler {
     public void handle() throws IOException {
         Scanner sc = new Scanner(System.in);
         while (true) {
-            String boringString = sc.nextLine();
-            out.println(boringString);
-
-            String startIndices = sc.nextLine();
-            out.println(startIndices);
-
-            String endIndices = sc.nextLine();
-            out.println(endIndices);
-
-            String operations = sc.nextLine();
-            out.println(operations);
 
             String option = sc.nextLine().toUpperCase();
-            out.println(option.toUpperCase());
+            out.println(option);
+
+            switch (option) {
+                case "FUNRANGE":{
+//                    String boringString = sc.nextLine();
+//                    out.println(boringString);
+//
+//                    String startIndices = sc.nextLine();
+//                    out.println(startIndices);
+//
+//                    String endIndices = sc.nextLine();
+//                    out.println(endIndices);
+                }
+                case "FUNNYSTRING":{
+
+                    String boringString = sc.nextLine();
+                    out.println(boringString);
+
+                    String startIndices = sc.nextLine();
+                    out.println(startIndices);
+
+                    String endIndices = sc.nextLine();
+                    out.println(endIndices);
+
+                    String operations = sc.nextLine();
+                    out.println(operations);
+                }
+
+                    break;
+                case "GET_FUNRANGEBYID":
+                    String id = sc.nextLine();
+                    out.println(id);
+                    break;
+            }
+//
+//            String boringString = sc.nextLine();
+//            out.println(boringString);
+//
+//            String startIndices = sc.nextLine();
+//            out.println(startIndices);
+//
+//            String endIndices = sc.nextLine();
+//            out.println(endIndices);
+//
+//            String operations = sc.nextLine();
+//            out.println(operations);
+
+//            String option = sc.nextLine().toUpperCase();
+//            out.println(option.toUpperCase());
+
+            String err = in.readLine();
+            System.out.println(err);
 
             String res1 = in.readLine();
 
@@ -48,6 +88,7 @@ public class ServerHandler {
             System.out.println(res1);
             System.out.println(res2);
             System.out.println(res3);
+
 
 
         }
