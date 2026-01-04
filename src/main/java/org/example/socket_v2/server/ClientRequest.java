@@ -46,33 +46,107 @@ public class ClientRequest {
     }
 
 
+
+
     public void chooseClientOperation() throws SQLException, IOException, InvocationTargetException, InstantiationException, IllegalAccessException {
 
+        System.out.println("here here :( :(  :(");
         ClientOption option = ClientOption.valueOf(in.readLine().toUpperCase());
 
+        FunnyStringEntity funnyStringEntity = new FunnyStringEntity();
+        FunnyStringEntityRequest funnyStringEntityRequest = new FunnyStringEntityRequest();
+
+        OperationRangeEntityRequest operationRangeEntityRequest = new OperationRangeEntityRequest();
+
+        FunnyStringEntityMapper funnyStringEntityMapper = new FunnyStringEntityMapper();
+
+//
+//
+//
+//        if(option.equals(ClientOption.FUNNYSTRING)){
+//
+//            String boringString = in.readLine();
+//            String startIndices = in.readLine();
+//            String endIndices = in.readLine();
+//            String operations = in.readLine();
+//
+//            String stringFunny = funnyString.getFunnyString(boringString, parsing.parseListOfIndexToken(startIndices), parsing.parseListOfIndexToken(endIndices), parsing.parseListOfOperationToken(operations));
+//
+//
+//            funnyStringEntityRequest.setBoringString(boringString);
+//            funnyStringEntityRequest.setFunnyString(stringFunny);
+//
+//            funnyStringEntity = funnyStringEntityMapper.toEntity(funnyStringEntityRequest);
+//            dbManager.insert(funnyStringEntity);
+//            long funny_id = dbManager.getFunnyId();
+//
+//            operationRangeEntityRequest.setStartIndex(parsing.parseListOfIndexToken(startIndices));
+//            operationRangeEntityRequest.setEndIndex(parsing.parseListOfIndexToken(endIndices));
+//            operationRangeEntityRequest.setOperation(parsing.parseListOfOperationToken(operations));
+//
+//            List<OperationRangeEntity> ranges = new OperationRangeEntityMapper().toEntity(operationRangeEntityRequest, funny_id);
+//            for (OperationRangeEntity operationRange : ranges) {
+//                dbManager.insert(operationRange);
+//            }
+//
+//
+//        }
+//        else if(option.equals("FUNRANGE")){
+//            System.out.println(">>>>>>>>>>>>>>>>start");
+//
+//            String boring = in.readLine();
+//            String start = in.readLine();
+//            String end = in.readLine();
+//
+//            String funRange = funnyString.getFunRanges(boring, parsing.parseListOfIndexToken(start), parsing.parseListOfIndexToken(end));
+//
+//            funnyStringEntityRequest.setBoringString(boring);
+//            funnyStringEntityRequest.setFunRange(funRange);
+//
+//
+//            funnyStringEntity = funnyStringEntityMapper.toEntity(funnyStringEntityRequest);
+//            dbManager.insert(funnyStringEntity);
+//            long funny_Id = dbManager.getFunnyId();
+//
+//            operationRangeEntityRequest.setStartIndex(parsing.parseListOfIndexToken(start));
+//            operationRangeEntityRequest.setEndIndex(parsing.parseListOfIndexToken(end));
+//            operationRangeEntityRequest.setOperation(null);
+//
+//
+//            List<OperationRangeEntity> ranges = new OperationRangeEntityMapper().toEntity(operationRangeEntityRequest, funny_Id);
+//            for (OperationRangeEntity operationRange : ranges) {
+//                dbManager.insert(operationRange);
+//            }
+//
+//            System.out.println(">>>>>>>>>>>>>>>>end");
+//
+//        }else if (option.equals("GET_FUNRANGEBYID")){
+//
+//            long id = Long.parseLong(in.readLine().trim());
+//
+//            funnyStringEntity = (FunnyStringEntity) dbManager.getById(id, FunnyStringEntity.class);
+//            if (funnyStringEntity == null) {
+//                out.println("No data found for ID " + id);
+//                return;
+//            }
+//        }
         // this  to edit because option null no read  client option
         switch (option) {
             case FUNRANGE: {
                 String boring = in.readLine();
-
-//                System.out.println(boring);
                 String start = in.readLine();
-
                 String end = in.readLine();
-
 
                 String funRange = funnyString.getFunRanges(boring, parsing.parseListOfIndexToken(start), parsing.parseListOfIndexToken(end));
 
-                FunnyStringEntityRequest funnyReq = new FunnyStringEntityRequest();
-                funnyReq.setBoringString(boring);
-                funnyReq.setFunRange(funRange);
+                funnyStringEntityRequest.setBoringString(boring);
+                funnyStringEntityRequest.setFunRange(funRange);
 
 
-                FunnyStringEntity funnyStringEntity = new FunnyStringEntityMapper().toEntity(funnyReq);
+               funnyStringEntity = funnyStringEntityMapper.toEntity(funnyStringEntityRequest);
                 dbManager.insert(funnyStringEntity);
                 long funny_Id = dbManager.getFunnyId();
 
-                OperationRangeEntityRequest operationRangeEntityRequest = new OperationRangeEntityRequest();
                 operationRangeEntityRequest.setStartIndex(parsing.parseListOfIndexToken(start));
                 operationRangeEntityRequest.setEndIndex(parsing.parseListOfIndexToken(end));
                 operationRangeEntityRequest.setOperation(null);
@@ -82,10 +156,20 @@ public class ClientRequest {
                 for (OperationRangeEntity operationRange : ranges) {
                     dbManager.insert(operationRange);
                 }
+                funnyStringEntityRequest = funnyStringEntityMapper.toRequest(funnyStringEntity);
 
-                out.println("inserted fun_range in database");
+                out.println("Boring_string : " + funnyStringEntityRequest.getBoringString());
+                System.out.println(funnyStringEntityRequest.getBoringString());
+
+                out.println("Fun_Range : " + funnyStringEntityRequest.getFunRange());
+                System.out.println(funnyStringEntityRequest.getFunRange());
+
+                out.println("Funny_string : " + funnyStringEntityRequest.getFunnyString());
+                System.out.println(funnyStringEntityRequest.getFunnyString());
+
+
+                break;
             }
-
 
             case FUNNYSTRING: {
                 String boringString = in.readLine();
@@ -94,15 +178,15 @@ public class ClientRequest {
                 String operations = in.readLine();
 
                 String stringFunny = funnyString.getFunnyString(boringString, parsing.parseListOfIndexToken(startIndices), parsing.parseListOfIndexToken(endIndices), parsing.parseListOfOperationToken(operations));
-                FunnyStringEntityRequest funnyStringEntityRequest = new FunnyStringEntityRequest();
+
+
                 funnyStringEntityRequest.setBoringString(boringString);
                 funnyStringEntityRequest.setFunnyString(stringFunny);
 
-                FunnyStringEntity funnyStringEntity = new FunnyStringEntityMapper().toEntity(funnyStringEntityRequest);
+                funnyStringEntity = funnyStringEntityMapper.toEntity(funnyStringEntityRequest);
                 dbManager.insert(funnyStringEntity);
                 long funny_id = dbManager.getFunnyId();
 
-                OperationRangeEntityRequest operationRangeEntityRequest = new OperationRangeEntityRequest();
                 operationRangeEntityRequest.setStartIndex(parsing.parseListOfIndexToken(startIndices));
                 operationRangeEntityRequest.setEndIndex(parsing.parseListOfIndexToken(endIndices));
                 operationRangeEntityRequest.setOperation(parsing.parseListOfOperationToken(operations));
@@ -111,40 +195,62 @@ public class ClientRequest {
                 for (OperationRangeEntity operationRange : ranges) {
                     dbManager.insert(operationRange);
                 }
-                out.println("inserted funny_string in database");
+                funnyStringEntityRequest = funnyStringEntityMapper.toRequest(funnyStringEntity);
+
+                out.println("Boring_string : " + funnyStringEntityRequest.getBoringString());
+                System.out.println(funnyStringEntityRequest.getBoringString());
+
+                out.println("Fun_Range : " + funnyStringEntityRequest.getFunRange());
+                System.out.println(funnyStringEntityRequest.getFunRange());
+
+                out.println("Funny_string : " + funnyStringEntityRequest.getFunnyString());
+                System.out.println(funnyStringEntityRequest.getFunnyString());
+
+
+                break;
             }
 
-            case GET_FUNRANGEBYID:
+            case GET_FUNRANGEBYID: {
                 long id = Long.parseLong(in.readLine().trim());
 
-                FunnyStringEntity funnyStringEntity = (FunnyStringEntity) dbManager.getById(id, FunnyStringEntity.class);
+                funnyStringEntity = (FunnyStringEntity) dbManager.getById(id, FunnyStringEntity.class);
                 if (funnyStringEntity == null) {
                     out.println("No data found for ID " + id);
-//                    System.out.println("No data found for id " + id);
                     return;
-                } else {
-
-                    FunnyStringEntityMapper funnyStringEntityMapper = new FunnyStringEntityMapper();
-                    FunnyStringEntityRequest funnyStringEntityRequest = funnyStringEntityMapper.toRequest(funnyStringEntity);
-
-                    out.println("Boring_string : " + funnyStringEntityRequest.getBoringString());
-                    System.out.println(funnyStringEntityRequest.getBoringString());
-
-                    out.println("Fun_Range : " + funnyStringEntityRequest.getFunRange());
-                    System.out.println(funnyStringEntityRequest.getFunRange());
-
-                    out.println("Funny_string : " + funnyStringEntityRequest.getFunnyString());
-                    System.out.println(funnyStringEntityRequest.getFunnyString());
                 }
+                funnyStringEntityRequest = funnyStringEntityMapper.toRequest(funnyStringEntity);
+
+                out.println("Boring_string : " + funnyStringEntityRequest.getBoringString());
+                System.out.println(funnyStringEntityRequest.getBoringString());
+
+                out.println("Fun_Range : " + funnyStringEntityRequest.getFunRange());
+                System.out.println(funnyStringEntityRequest.getFunRange());
+
+                out.println("Funny_string : " + funnyStringEntityRequest.getFunnyString());
+                System.out.println(funnyStringEntityRequest.getFunnyString());
+
+                break;
+            }
+            default:
+               System.out.println("No data found for ID ");
                 break;
 
-//
-//                    case GET_FUNRANGE:
-//                        id = get id;
-//                        createFunStringEntity
-//                                dbManager.get(FunStringEntity);
-//                        send to user the data;
+
         }
+
+//        funnyStringEntityRequest = funnyStringEntityMapper.toRequest(funnyStringEntity);
+//
+//        out.println("Boring_string : " + funnyStringEntityRequest.getBoringString());
+//        System.out.println(funnyStringEntityRequest.getBoringString());
+//
+//        out.println("Fun_Range : " + funnyStringEntityRequest.getFunRange());
+//        System.out.println(funnyStringEntityRequest.getFunRange());
+//
+//        out.println("Funny_string : " + funnyStringEntityRequest.getFunnyString());
+//        System.out.println(funnyStringEntityRequest.getFunnyString());
+
+
+        System.out.println("------------------------------------------");
 
     }
 }

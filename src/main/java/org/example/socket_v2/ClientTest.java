@@ -13,7 +13,8 @@ public class ClientTest {
 //"REVERSE", "UPPERCASE", "SORT", "COMPRESSION"
 //funrange
 
-//ccchHJKkklmlmmml
+//funnystring
+//abcdefghimmmmmmmmmmllk
 //1, 5, 7, 11, 13
 //3, 5, 10, 12, 14
 //"REVERSE", "UPPERCASE", "SORT", "LOWERCASE", "COMPRESSION"

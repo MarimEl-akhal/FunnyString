@@ -25,21 +25,35 @@ public class ServerHandler {
         Scanner sc = new Scanner(System.in);
         while (true) {
 
+            System.out.println("enter option:  ");
             String option = sc.nextLine().toUpperCase();
             out.println(option);
+          //  System.out.println(option);
+
 
             switch (option) {
                 case "FUNRANGE":{
-//                    String boringString = sc.nextLine();
-//                    out.println(boringString);
-//
-//                    String startIndices = sc.nextLine();
-//                    out.println(startIndices);
-//
-//                    String endIndices = sc.nextLine();
-//                    out.println(endIndices);
+                    String boringString = sc.nextLine();
+                    out.println(boringString);
+
+                    String startIndices = sc.nextLine();
+                    out.println(startIndices);
+
+                    String endIndices = sc.nextLine();
+                    out.println(endIndices);
+
+                    String res1 = in.readLine();
+
+                    String res2 = in.readLine();
+
+                    String res3 = in.readLine();
+
+                    System.out.println(res1);
+                    System.out.println(res2);
+                    System.out.println(res3);
+                    break;
                 }
-                case "FUNNYSTRING":{
+                case "FUNNYSTRING": {
 
                     String boringString = sc.nextLine();
                     out.println(boringString);
@@ -52,45 +66,38 @@ public class ServerHandler {
 
                     String operations = sc.nextLine();
                     out.println(operations);
-                }
 
+                    String res1 = in.readLine();
+
+                    String res2 = in.readLine();
+
+                    String res3 = in.readLine();
+
+                    System.out.println(res1);
+                    System.out.println(res2);
+                    System.out.println(res3);
                     break;
-                case "GET_FUNRANGEBYID":
+                }
+                case "GET_FUNRANGEBYID": {
+                    System.out.println("enter id : ");
                     String id = sc.nextLine();
                     out.println(id);
+
+                    String res1 = in.readLine();
+
+                    String res2 = in.readLine();
+
+                    String res3 = in.readLine();
+
+                    System.out.println(res1);
+                    System.out.println(res2);
+                    System.out.println(res3);
+                    break;
+
+                }
+                default:
                     break;
             }
-//
-//            String boringString = sc.nextLine();
-//            out.println(boringString);
-//
-//            String startIndices = sc.nextLine();
-//            out.println(startIndices);
-//
-//            String endIndices = sc.nextLine();
-//            out.println(endIndices);
-//
-//            String operations = sc.nextLine();
-//            out.println(operations);
-
-//            String option = sc.nextLine().toUpperCase();
-//            out.println(option.toUpperCase());
-
-            String err = in.readLine();
-            System.out.println(err);
-
-            String res1 = in.readLine();
-
-            String res2 = in.readLine();
-
-            String res3 = in.readLine();
-
-            System.out.println(res1);
-            System.out.println(res2);
-            System.out.println(res3);
-
-
-
         }
     }
 }

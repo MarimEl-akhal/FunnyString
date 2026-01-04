@@ -78,12 +78,12 @@ public class DataBaseManager<T> implements DataBaseManagerInterface<T> {
             String columns = String.join(",", columnNames);
             String questionMarks = String.join(",", "?".repeat(values.size()).split(""));
             String insertQuery = "INSERT INTO " + tableName + "(" + columns + ") VALUES (" + questionMarks + ")";
-            System.out.println(insertQuery);
+//            System.out.println(insertQuery);
             PreparedStatement preparedStatement = getConnection().prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
             for (int i = 0; i < values.size(); i++) {
                 preparedStatement.setObject(i + 1, values.get(i));
             }
-            System.out.println(values);
+//            System.out.println(values);
             preparedStatement.executeUpdate();
 
             ResultSet keys = preparedStatement.getGeneratedKeys();
@@ -98,50 +98,17 @@ public class DataBaseManager<T> implements DataBaseManagerInterface<T> {
         }
 
     }
-//
-//    public void insertFunnyString(String boringString, String funRange, String funnyString) throws SQLException {
-//        String strQuery = "INSERT INTO funny_string (boringString,funRanges,funnyString) VALUES (?,?,?)";
-//        PreparedStatement pstmt = getConnection().prepareStatement(strQuery, Statement.RETURN_GENERATED_KEYS);
-//
-//        pstmt.setString(1, boringString);
-//        pstmt.setString(2, funRange);
-//        pstmt.setString(3, funnyString);
-//        pstmt.executeUpdate();
-//
-//        ResultSet generatedKeys = pstmt.getGeneratedKeys();
-//        if (generatedKeys.next()) {
-//            funnyId = generatedKeys.getInt(1);
-//        }
-//
-//    }
-//
-//    public void insertOperationRange(List<Integer> startIndexList, List<Integer> endIndexList, List<Operation> operationsList) throws SQLException {
-//
-//        String range_operator = "INSERT INTO operation_range (funny_id,start_Index,end_Index,operation) VALUES (?,?,?,?)";
-//        PreparedStatement stmt = getConnection().prepareStatement(range_operator);
-//
-//
-//        for (int i = 0; i < startIndexList.size(); i++) {
-//            stmt.setInt(1, funnyId);
-//            stmt.setInt(2, startIndexList.get(i));
-//            stmt.setInt(3, endIndexList.get(i));
-//            stmt.setString(4, operationsList.get(i).name());
-//            stmt.executeUpdate();
-//        }
-//
-//        closeConnection();
-//    }
 
-    public static void closeConnection() {
-        try {
-            if (connection != null && !connection.isClosed()) {
-                connection.close();
-                System.out.println("Database connection is closed");
-            }
-        } catch (SQLException e) {
-            System.out.println("Closing Connection failed");
-        }
-    }
+//    public static void closeConnection() {
+//        try {
+//            if (connection != null && !connection.isClosed()) {
+//                connection.close();
+//                System.out.println("Database connection is closed");
+//            }
+//        } catch (SQLException e) {
+//            System.out.println("Closing Connection failed");
+//        }
+//    }
 
 
 }
