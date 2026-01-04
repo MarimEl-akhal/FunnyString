@@ -9,6 +9,7 @@ import org.example.parsingg.IParsing;
 import org.example.parsingg.Parsing;
 import org.example.socket_v2.server.ClientOption;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.List;
@@ -16,16 +17,17 @@ import java.util.Scanner;
 
 
 public class Main {
-    public static void main(String[] args) throws SQLException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    public static void main(String[] args) throws SQLException, InvocationTargetException, InstantiationException, IllegalAccessException, IOException {
         Scanner in = new Scanner(System.in);
         IParsing parsing = FactoryDependency.getDependency(Parsing.class);
         StringFunifier funnyString = FactoryDependency.getDependency(StringFunifier.class);
         DataBaseManager dbManager = FactoryDependency.getDependency(DataBaseManager.class);
+        FunnyStringEntity funnyStringEntity = FactoryDependency.getDependency(FunnyStringEntity.class);
+        OperationRangeEntity operationRange = FactoryDependency.getDependency(OperationRangeEntity.class);
 
+//        FunnyStringEntity funnyStringEntity = new FunnyStringEntity();
 
-        FunnyStringEntity funnyStringEntity = new FunnyStringEntity();
-
-        OperationRangeEntity operationRange = new OperationRangeEntity();
+//        OperationRangeEntity operationRange = new OperationRangeEntity();
 
 
 
