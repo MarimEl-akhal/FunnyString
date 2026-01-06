@@ -10,6 +10,7 @@ import org.example.entity.OperationRangeEntity;
 import org.example.factory.FactoryDependency;
 import org.example.mapper.FunnyStringEntityMapper;
 import org.example.mapper.OperationRangeEntityMapper;
+import org.example.operator.Operation;
 import org.example.parsingg.IParsing;
 import org.example.parsingg.Parsing;
 
@@ -52,8 +53,9 @@ public class ClientRequest {
         ClientOption option = ClientOption.valueOf(in.readLine().toUpperCase());
 
         FunnyStringEntity funnyStringEntity ;
-        FunnyStringEntityResponse funnyStringEntityResponse = new FunnyStringEntityResponse();
-        FunnyStringEntityMapper funnyStringEntityMapper = new FunnyStringEntityMapper();
+        OperationRangeEntity operationRangeEntity;
+//        FunnyStringEntityResponse funnyStringEntityResponse = new FunnyStringEntityResponse();
+//        FunnyStringEntityMapper funnyStringEntityMapper = new FunnyStringEntityMapper();
 
         // this  to edit because option null no read  client option
         switch (option) {
@@ -62,33 +64,38 @@ public class ClientRequest {
                 String start = in.readLine();
                 String end = in.readLine();
 
-                String funRange = funnyString.getFunRanges(boring, parsing.parseListOfIndexToken(start), parsing.parseListOfIndexToken(end));
+                List<Integer> startList = parsing.parseListOfIndexToken(start);
+                List<Integer> endList = parsing.parseListOfIndexToken(end);
+                String funRange = funnyString.getFunRanges(boring, startList, endList);
 
-                funnyStringEntityResponse.setBoringString(boring);
-                funnyStringEntityResponse.setFunRange(funRange);
+                funnyStringEntity = new FunnyStringEntity();
+                funnyStringEntity.setBoringString(boring);
+                funnyStringEntity.setFunRange(funRange);
 
-
-                funnyStringEntity = funnyStringEntityMapper.toEntity(funnyStringEntityResponse);
                 dbManager.insert(funnyStringEntity);
                 long funny_Id = dbManager.getFunnyId();
 
-                OperationRangeEntityRequest operationRangeEntityRequest =  createOperationRangeEntityRequest(start, end, null);
+                operationRangeEntity = new OperationRangeEntity();
 
-
-                List<OperationRangeEntity> ranges = new OperationRangeEntityMapper().toEntity(operationRangeEntityRequest, funny_Id);
-                for (OperationRangeEntity operationRange : ranges) {
-                    dbManager.insert(operationRange);
+                for (int i = 0; i < startList.size(); i++) {
+                    operationRangeEntity.setStartIndex(startList.get(i));
+                    operationRangeEntity.setEndIndex(endList.get(i));
                 }
-                funnyStringEntityResponse = funnyStringEntityMapper.toRequest(funnyStringEntity);
+                operationRangeEntity.setFunnyStringId(funny_Id);
+                dbManager.insert(operationRangeEntity);
 
-                out.println("Boring_string : " + funnyStringEntityResponse.getBoringString());
-                System.out.println(funnyStringEntityResponse.getBoringString());
 
-                out.println("Fun_Range : " + funnyStringEntityResponse.getFunRange());
-                System.out.println(funnyStringEntityResponse.getFunRange());
+                out.println("FUNNY_STRING_ID : "+ funny_Id);
+                System.out.println(funnyStringEntity.getId());
 
-                out.println("Funny_string : " + funnyStringEntityResponse.getFunnyString());
-                System.out.println(funnyStringEntityResponse.getFunnyString());
+                out.println("Boring_string : " + funnyStringEntity.getBoringString());
+                System.out.println(funnyStringEntity.getBoringString());
+
+                out.println("Fun_Range : " + funnyStringEntity.getFunRange());
+                System.out.println(funnyStringEntity.getFunRange());
+
+                out.println("Funny_string : " + funnyStringEntity.getFunnyString());
+                System.out.println(funnyStringEntity.getFunnyString());
 
 
                 break;
@@ -100,34 +107,40 @@ public class ClientRequest {
                 String end = in.readLine();
                 String operation = in.readLine();
 
-                String stringFunny = funnyString.getFunnyString(boringString, parsing.parseListOfIndexToken(start), parsing.parseListOfIndexToken(end), parsing.parseListOfOperationToken(operation));
+                List<Integer> startList = parsing.parseListOfIndexToken(start);
+                List<Integer> endList = parsing.parseListOfIndexToken(end);
+                List<Operation> opsList = parsing.parseListOfOperationToken(operation);
 
+                String stringFunny = funnyString.getFunnyString(boringString, startList, endList, opsList);
 
-                funnyStringEntityResponse.setBoringString(boringString);
-                funnyStringEntityResponse.setFunnyString(stringFunny);
+                funnyStringEntity = new FunnyStringEntity();
 
+                funnyStringEntity.setBoringString(boringString);
+                funnyStringEntity.setFunnyString(stringFunny);
 
-                funnyStringEntity = funnyStringEntityMapper.toEntity(funnyStringEntityResponse);
                 dbManager.insert(funnyStringEntity);
                 long funny_id = dbManager.getFunnyId();
 
-                OperationRangeEntityRequest operationRangeEntityRequest =  createOperationRangeEntityRequest(start, end, operation);
-
-
-                List<OperationRangeEntity> ranges = new OperationRangeEntityMapper().toEntity(operationRangeEntityRequest, funny_id);
-                for (OperationRangeEntity operationRange : ranges) {
-                    dbManager.insert(operationRange);
+                operationRangeEntity = new OperationRangeEntity();
+                for (int i = 0; i < startList.size(); i++) {
+                    operationRangeEntity.setStartIndex(startList.get(i));
+                    operationRangeEntity.setEndIndex(endList.get(i));
+                    operationRangeEntity.setOperation(opsList.get(i).name());
                 }
-                funnyStringEntityResponse = funnyStringEntityMapper.toRequest(funnyStringEntity);
+                operationRangeEntity.setFunnyStringId(funny_id);
+                dbManager.insert(operationRangeEntity);
 
-                out.println("Boring_string : " + funnyStringEntityResponse.getBoringString());
-                System.out.println(funnyStringEntityResponse.getBoringString());
+                out.println("FUNNY_STRING_ID : "+ funny_id);
+                System.out.println(funnyStringEntity.getId());
 
-                out.println("Fun_Range : " + funnyStringEntityResponse.getFunRange());
-                System.out.println(funnyStringEntityResponse.getFunRange());
+                out.println("Boring_string : " + funnyStringEntity.getBoringString());
+                System.out.println(funnyStringEntity.getBoringString());
 
-                out.println("Funny_string : " + funnyStringEntityResponse.getFunnyString());
-                System.out.println(funnyStringEntityResponse.getFunnyString());
+                out.println("Fun_Range : " + funnyStringEntity.getFunRange());
+                System.out.println(funnyStringEntity.getFunRange());
+
+                out.println("Funny_string : " + funnyStringEntity.getFunnyString());
+                System.out.println(funnyStringEntity.getFunnyString());
 
 
                 break;
@@ -141,16 +154,18 @@ public class ClientRequest {
                     out.println("No data found for ID " + id);
                     return;
                 }
-                funnyStringEntityResponse = funnyStringEntityMapper.toRequest(funnyStringEntity);
 
-                out.println("Boring_string : " + funnyStringEntityResponse.getBoringString());
-                System.out.println(funnyStringEntityResponse.getBoringString());
+                out.println("FUNNY_STRING_ID : "+ id);
+                System.out.println(funnyStringEntity.getId());
 
-                out.println("Fun_Range : " + funnyStringEntityResponse.getFunRange());
-                System.out.println(funnyStringEntityResponse.getFunRange());
+                out.println("Boring_string : " + funnyStringEntity.getBoringString());
+                System.out.println(funnyStringEntity.getBoringString());
 
-                out.println("Funny_string : " + funnyStringEntityResponse.getFunnyString());
-                System.out.println(funnyStringEntityResponse.getFunnyString());
+                out.println("Fun_Range : " + funnyStringEntity.getFunRange());
+                System.out.println(funnyStringEntity.getFunRange());
+
+                out.println("Funny_string : " + funnyStringEntity.getFunnyString());
+                System.out.println(funnyStringEntity.getFunnyString());
 
                 break;
             }
@@ -164,18 +179,6 @@ public class ClientRequest {
 
 
 
-    }
-    private OperationRangeEntityRequest createOperationRangeEntityRequest(String start, String end, String operation){
-        OperationRangeEntityRequest operationRangeEntityRequest = new OperationRangeEntityRequest();
-        operationRangeEntityRequest.setStartIndices(parsing.parseListOfIndexToken(start));
-        operationRangeEntityRequest.setEndIndices(parsing.parseListOfIndexToken(end));
-        if(operation == null){
-            operationRangeEntityRequest.setOperations(null);
-        }else{
-        operationRangeEntityRequest.setOperations(parsing.parseListOfOperationToken(operation));
-        }
-
-        return operationRangeEntityRequest;
     }
 }
 

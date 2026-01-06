@@ -37,12 +37,15 @@ public class ServerHandler {
                     String endIndices = sc.nextLine();
                     out.println(endIndices);
 
+                    String res =in.readLine();
+
                     String res1 = in.readLine();
 
                     String res2 = in.readLine();
 
                     String res3 = in.readLine();
 
+                    System.out.println(res);
                     System.out.println(res1);
                     System.out.println(res2);
                     System.out.println(res3);
@@ -62,12 +65,15 @@ public class ServerHandler {
                     String operations = sc.nextLine();
                     out.println(operations);
 
+                    String res =in.readLine();
+
                     String res1 = in.readLine();
 
                     String res2 = in.readLine();
 
                     String res3 = in.readLine();
 
+                    System.out.println(res);
                     System.out.println(res1);
                     System.out.println(res2);
                     System.out.println(res3);
@@ -77,6 +83,7 @@ public class ServerHandler {
 //                    System.out.println("enter id : ");
                     String id = sc.nextLine();
                     out.println(id);
+                    String res =in.readLine();
 
                     String res1 = in.readLine();
 
@@ -84,6 +91,7 @@ public class ServerHandler {
 
                     String res3 = in.readLine();
 
+                    System.out.println(res);
                     System.out.println(res1);
                     System.out.println(res2);
                     System.out.println(res3);

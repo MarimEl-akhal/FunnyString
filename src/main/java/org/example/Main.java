@@ -9,7 +9,6 @@ import org.example.parsingg.IParsing;
 import org.example.parsingg.Parsing;
 import org.example.socket_v2.server.ClientOption;
 
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Scanner;
@@ -22,12 +21,8 @@ public class Main {
         StringFunifier funnyString = FactoryDependency.getDependency(StringFunifier.class);
         DataBaseManager dbManager = FactoryDependency.getDependency(DataBaseManager.class);
 
-//        FunnyStringEntity funnyStringEntity = FactoryDependency.getDependency(FunnyStringEntity.class);
-//        OperationRangeEntity operationRange = FactoryDependency.getDependency(OperationRangeEntity.class);
-
-                FunnyStringEntity funnyStringEntity = new FunnyStringEntity();
-
-        OperationRangeEntity operationRange = new OperationRangeEntity();
+        FunnyStringEntity funnyStringEntity;
+        OperationRangeEntity operationRange;
 
         while (true) {
             ClientOption option = ClientOption.valueOf(in.nextLine().toUpperCase());
@@ -43,12 +38,15 @@ public class Main {
 
                     String funRanges = funnyString.getFunRanges(boringString, startList, endList);
 
+                    funnyStringEntity = new FunnyStringEntity();
                     funnyStringEntity.setBoringString(boringString);
                     funnyStringEntity.setFunRange(funRanges);
 //                    funnyStringEntity.setFunnyString(null);
 
+
                     dbManager.insert(funnyStringEntity);
 
+                    operationRange = new OperationRangeEntity();
                     long funny_Id = dbManager.getFunnyId();
                     for (int i = 0; i < startList.size(); i++) {
                         operationRange.setStartIndex(startList.get(i));
@@ -76,6 +74,7 @@ public class Main {
 
                     String stringFunny = funnyString.getFunnyString(boringString, startList, endList, opsList);
 
+                    funnyStringEntity = new FunnyStringEntity();
                     funnyStringEntity.setBoringString(boringString);
                     funnyStringEntity.setFunnyString(stringFunny);
 //                    funnyStringEntity.setFunRange(null);
@@ -83,6 +82,7 @@ public class Main {
 
                     long funny_Id = dbManager.getFunnyId();
 
+                    operationRange = new OperationRangeEntity();
                     for (int i = 0; i < startList.size(); i++) {
                         operationRange.setStartIndex(startList.get(i));
                         operationRange.setEndIndex(endList.get(i));
