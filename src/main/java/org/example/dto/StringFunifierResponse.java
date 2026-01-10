@@ -1,9 +1,18 @@
 package org.example.dto;
 
-public class FunnyStringEntityResponse {
+public class StringFunifierResponse {
+    private long funnyId;
     private String boringString;
     private String funnyString;
     private String funRange;
+
+    public long getFunnyId() {
+        return funnyId;
+    }
+
+    public void setFunnyId(long funnyId) {
+        this.funnyId = funnyId;
+    }
 
     public String getBoringString() {
         return boringString;

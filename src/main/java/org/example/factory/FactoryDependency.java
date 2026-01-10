@@ -1,9 +1,11 @@
 package org.example.factory;
 
+import org.example.Service;
 import org.example.StringFunifier;
 import org.example.database.DataBaseManager;
 import org.example.entity.FunnyStringEntity;
 import org.example.entity.OperationRangeEntity;
+import org.example.mapper.FunnyStringEntityMapper;
 import org.example.operator.StringOperator;
 import org.example.parsingg.Parsing;
 import org.example.socket_v2.server.ClientRequest;
@@ -12,7 +14,7 @@ import java.io.IOException;
 
 
 public class FactoryDependency {
-    public static <T> T getDependency(Class<T> className)  {
+    public static <T> T getDependency(Class<T> className) {
 
         if (className == StringOperator.class) {
             return (T) new StringOperatorFactory().createInstance();
@@ -39,6 +41,18 @@ public class FactoryDependency {
                 return (T) new ClientRequestFactory().createInstance();
             } catch (IOException e) {
                 System.err.println(e);
+            }
+        } else if (className == Service.class) {
+            try {
+                return (T) new ServiceFactory().createInstance();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else if (className == FunnyStringEntityMapper.class) {
+            try {
+                return (T) new FunnyStringEntityMapperFactory().createInstance();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         }
 

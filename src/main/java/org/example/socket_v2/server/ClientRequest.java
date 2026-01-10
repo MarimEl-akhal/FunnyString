@@ -3,13 +3,9 @@ package org.example.socket_v2.server;
 
 import org.example.StringFunifier;
 import org.example.database.DataBaseManager;
-import org.example.dto.FunnyStringEntityResponse;
-import org.example.dto.OperationRangeEntityRequest;
 import org.example.entity.FunnyStringEntity;
 import org.example.entity.OperationRangeEntity;
 import org.example.factory.FactoryDependency;
-import org.example.mapper.FunnyStringEntityMapper;
-import org.example.mapper.OperationRangeEntityMapper;
 import org.example.operator.Operation;
 import org.example.parsingg.IParsing;
 import org.example.parsingg.Parsing;
@@ -50,6 +46,7 @@ public class ClientRequest {
 
     public void chooseClientOperation() throws SQLException, IOException, InvocationTargetException, InstantiationException, IllegalAccessException {
 
+//service.execut();
         ClientOption option = ClientOption.valueOf(in.readLine().toUpperCase());
 
         FunnyStringEntity funnyStringEntity ;
