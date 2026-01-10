@@ -22,18 +22,14 @@ public class Service {
 
     private FunnyStringEntity funnyStringEntity;
     private OperationRangeEntity operationRangeEntity;
-    private ClientOption option;
 
-    //    private final PrintWriter out;
-//    private final BufferedReader in;
-//
     private final IParsing parsing;
     private final StringFunifier funnyString;
     private final DataBaseManager dbManager;
     private final FunnyStringEntityMapper mapper;
 
 
-    public Service() throws IOException {
+    public Service() {
         this.parsing = FactoryDependency.getDependency(Parsing.class);
         this.funnyString = FactoryDependency.getDependency(StringFunifier.class);
         this.dbManager = FactoryDependency.getDependency(DataBaseManager.class);
@@ -48,7 +44,7 @@ public class Service {
         while (true) {
             String option = inputStrategy.read().toUpperCase();
             switch (ClientOption.valueOf(option)) {
-                case FUNRANGE-> {
+                case FUNRANGE -> {
                     String boring = inputStrategy.read();
                     String start = inputStrategy.read();
                     String end = inputStrategy.read();
@@ -64,7 +60,7 @@ public class Service {
                     outputStrategy.print("FunRange: " + response.getFunRange());
                     outputStrategy.print("FunnyString: " + response.getFunnyString());
                 }
-                case FUNNYSTRING-> {
+                case FUNNYSTRING -> {
                     String boring = inputStrategy.read();
                     String start = inputStrategy.read();
                     String end = inputStrategy.read();
@@ -80,9 +76,9 @@ public class Service {
                     outputStrategy.print("FunnyId: " + response.getFunnyId());
                     outputStrategy.print("BoringString: " + response.getBoringString());
                     outputStrategy.print("FunnyString: " + response.getFunnyString());
-                    outputStrategy.print("FunRange: "+response.getFunRange());
+                    outputStrategy.print("FunRange: " + response.getFunRange());
                 }
-                case GET_FUNRANGEBYID-> {
+                case GET_FUNRANGEBYID -> {
                     String id = inputStrategy.read();
 
                     StringFunifierRequest stringFunifierRequest = new StringFunifierRequest();
@@ -115,10 +111,8 @@ public class Service {
         dbManager.insert(funnyStringEntity);
         long funny_Id = dbManager.getFunnyId();
 
-        StringFunifierResponse response = new StringFunifierResponse();
-        response.setBoringString(boringString);
-        response.setFunRange(funRange);
-        response.setFunnyId(funny_Id);
+
+        StringFunifierResponse response = mapper.toResponse(funnyStringEntity, funny_Id);
 
         operationRangeEntity = new OperationRangeEntity();
 
@@ -149,10 +143,8 @@ public class Service {
         dbManager.insert(funnyStringEntity);
         long funny_Id = dbManager.getFunnyId();
 
-        StringFunifierResponse response = new StringFunifierResponse();
-        response.setBoringString(boringString);
-        response.setFunnyString(stringFunny);
-        response.setFunnyId(funny_Id);
+        StringFunifierResponse response = mapper.toResponse(funnyStringEntity, funny_Id);
+
 
         operationRangeEntity = new OperationRangeEntity();
 
@@ -171,12 +163,14 @@ public class Service {
         long id = Long.parseLong(stringFunifierRequest.getFunnyId());
         funnyStringEntity = (FunnyStringEntity) dbManager.getById(id, FunnyStringEntity.class);
 
+        if (funnyStringEntity == null) {
+            throw new Error("No data found for id " + id);
+        }
 
-        StringFunifierResponse response = mapper.toResponse(funnyStringEntity);
 
-
-        return  response;
+        return mapper.toResponse(funnyStringEntity, id);
     }
 
 
 }
+

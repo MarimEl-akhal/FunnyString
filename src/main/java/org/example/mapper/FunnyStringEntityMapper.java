@@ -5,9 +5,9 @@ import org.example.entity.FunnyStringEntity;
 
 public class FunnyStringEntityMapper {
 
-    public StringFunifierResponse toResponse(FunnyStringEntity funnyStringEntity) {
+    public StringFunifierResponse toResponse(FunnyStringEntity funnyStringEntity,long id) {
         StringFunifierResponse response = new StringFunifierResponse();
-        response.setFunnyId(funnyStringEntity.getId());
+        response.setFunnyId(id);
         response.setBoringString(funnyStringEntity.getBoringString());
         response.setFunnyString(funnyStringEntity.getFunnyString());
         response.setFunRange(funnyStringEntity.getFunRange());

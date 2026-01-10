@@ -11,9 +11,7 @@ public class ClientHandler extends Thread {
     private final Socket clientSocket;
 
     public ClientHandler(Socket socket) throws IOException {
-//        System.out.println("bnm,qwertyuisdfghjkxcvbn");
         this.clientSocket = socket;
-
     }
 
 
