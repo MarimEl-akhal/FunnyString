@@ -16,6 +16,7 @@ import org.example.strategy.OutputStrategy;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Service {
@@ -53,7 +54,8 @@ public class Service {
                     stringFunifierRequest.setStartIndices(start);
                     stringFunifierRequest.setEndIndices(end);
 
-                    StringFunifierResponse response = FunRangeScenario(stringFunifierRequest);
+//                    StringFunifierResponse response = FunRangeScenario(stringFunifierRequest);
+                    StringFunifierResponse response = scenario(stringFunifierRequest,option);
                     outputStrategy.print("FunnyId: " + response.getFunnyId());
                     outputStrategy.print("BoringString: " + response.getBoringString());
                     outputStrategy.print("FunRange: " + response.getFunRange());
@@ -71,7 +73,8 @@ public class Service {
                     stringFunifierRequest.setEndIndices(end);
                     stringFunifierRequest.setOperations(op);
 
-                    StringFunifierResponse response = FunnyStringScenario(stringFunifierRequest);
+//                    StringFunifierResponse response = FunnyStringScenario(stringFunifierRequest);
+                    StringFunifierResponse response = scenario(stringFunifierRequest,option);
                     outputStrategy.print("FunnyId: " + response.getFunnyId());
                     outputStrategy.print("BoringString: " + response.getBoringString());
                     outputStrategy.print("FunnyString: " + response.getFunnyString());
@@ -171,5 +174,57 @@ public class Service {
     }
 
 
+    private StringFunifierResponse scenario(StringFunifierRequest request,String option){
+        String boringString = request.getBoringString();
+        List<Integer> startList = parsing.parseListOfIndexToken(request.getStartIndices());
+        List<Integer> endList = parsing.parseListOfIndexToken(request.getEndIndices());
+        List <Operation>  operations = new ArrayList<>() ;
+        if (request.getOperations() != null) {
+            operations = parsing.parseListOfOperationToken(request.getOperations());
+        }else {
+            request.setOperations(null);
+        }
+
+
+        if (ClientOption.valueOf(option) == ClientOption.FUNRANGE) {
+            String funRange = funnyString.getFunRanges(boringString, startList, endList);
+            funnyStringEntity = new FunnyStringEntity();
+            funnyStringEntity.setBoringString(boringString);
+            funnyStringEntity.setFunRange(funRange);
+        }
+        else if (ClientOption.valueOf(option)== ClientOption.FUNNYSTRING) {
+            String stringFunny = funnyString.getFunnyString(boringString, startList, endList, operations);
+            funnyStringEntity = new FunnyStringEntity();
+            funnyStringEntity.setBoringString(boringString);
+            funnyStringEntity.setFunnyString(stringFunny);
+        }
+
+        dbManager.insert(funnyStringEntity);
+        long funny_Id = dbManager.getFunnyId();
+
+        StringFunifierResponse response = mapper.toResponse(funnyStringEntity, funny_Id);
+
+
+        operationRangeEntity = new OperationRangeEntity();
+
+        for (int i = 0; i < startList.size(); i++) {
+            operationRangeEntity.setStartIndex(startList.get(i));
+            operationRangeEntity.setEndIndex(endList.get(i));
+            if (request.getOperations() != null) {
+                operationRangeEntity.setOperation(operations.get(i).name());
+            }else{
+                operationRangeEntity.setOperation(null);
+            }
+
+        }
+        operationRangeEntity.setFunnyStringId(funny_Id);
+        dbManager.insert(operationRangeEntity);
+
+
+        return response;
+
+
+
+    }
 }
 
