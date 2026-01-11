@@ -20,8 +20,8 @@ public class Server {
     private PrintWriter out;
     private BufferedReader in;
 
-    private IParsing parsing = FactoryDependency.getDependency(Parsing.class);
-    private StringFunifier funnyString = FactoryDependency.getDependency(StringFunifier.class);
+    private final IParsing parsing = FactoryDependency.getDependency(Parsing.class);
+    private final StringFunifier funnyString = FactoryDependency.getDependency(StringFunifier.class);
 
 
     public Server(int port) {

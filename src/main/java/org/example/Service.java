@@ -20,13 +20,12 @@ import java.util.List;
 
 public class Service {
 
-    private FunnyStringEntity funnyStringEntity;
-    private OperationRangeEntity operationRangeEntity;
-
     private final IParsing parsing;
     private final StringFunifier funnyString;
     private final DataBaseManager dbManager;
     private final FunnyStringEntityMapper mapper;
+    private FunnyStringEntity funnyStringEntity;
+    private OperationRangeEntity operationRangeEntity;
 
 
     public Service() {
@@ -45,12 +44,12 @@ public class Service {
             String option = inputStrategy.read().toUpperCase();
             switch (ClientOption.valueOf(option)) {
                 case FUNRANGE -> {
-                    String boring = inputStrategy.read();
+                    String boringString = inputStrategy.read();
                     String start = inputStrategy.read();
                     String end = inputStrategy.read();
 
                     StringFunifierRequest stringFunifierRequest = new StringFunifierRequest();
-                    stringFunifierRequest.setBoringString(boring);
+                    stringFunifierRequest.setBoringString(boringString);
                     stringFunifierRequest.setStartIndices(start);
                     stringFunifierRequest.setEndIndices(end);
 
@@ -61,13 +60,13 @@ public class Service {
                     outputStrategy.print("FunnyString: " + response.getFunnyString());
                 }
                 case FUNNYSTRING -> {
-                    String boring = inputStrategy.read();
+                    String boringString = inputStrategy.read();
                     String start = inputStrategy.read();
                     String end = inputStrategy.read();
                     String op = inputStrategy.read();
 
                     StringFunifierRequest stringFunifierRequest = new StringFunifierRequest();
-                    stringFunifierRequest.setBoringString(boring);
+                    stringFunifierRequest.setBoringString(boringString);
                     stringFunifierRequest.setStartIndices(start);
                     stringFunifierRequest.setEndIndices(end);
                     stringFunifierRequest.setOperations(op);

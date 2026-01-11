@@ -5,7 +5,7 @@ import org.example.entity.FunnyStringEntity;
 
 public class FunnyStringEntityMapper {
 
-    public StringFunifierResponse toResponse(FunnyStringEntity funnyStringEntity,long id) {
+    public StringFunifierResponse toResponse(FunnyStringEntity funnyStringEntity, long id) {
         StringFunifierResponse response = new StringFunifierResponse();
         response.setFunnyId(id);
         response.setBoringString(funnyStringEntity.getBoringString());

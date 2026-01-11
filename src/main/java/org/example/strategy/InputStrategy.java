@@ -3,7 +3,7 @@ package org.example.strategy;
 import java.io.IOException;
 
 public interface InputStrategy {
-    public String  read() throws IOException;
+    String read() throws IOException;
 }
 
 

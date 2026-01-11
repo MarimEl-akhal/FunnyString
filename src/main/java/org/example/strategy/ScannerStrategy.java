@@ -3,7 +3,7 @@ package org.example.strategy;
 import java.util.Scanner;
 
 public class ScannerStrategy implements InputStrategy {
-    private Scanner scanner;
+    private final Scanner scanner;
 
     public ScannerStrategy(Scanner scanner) {
         this.scanner = scanner;

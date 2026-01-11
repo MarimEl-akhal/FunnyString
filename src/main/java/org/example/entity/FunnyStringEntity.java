@@ -3,14 +3,13 @@ package org.example.entity;
 public class FunnyStringEntity {
 
     private long id;
+    private String boringString;
+    private String funnyString;
+    private String funRange;
 
     public long getId() {
         return id;
     }
-
-    private String boringString;
-    private String funnyString;
-    private String funRange;
 
     public String getFunRange() {
         return funRange;

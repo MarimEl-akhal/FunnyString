@@ -1,6 +1,6 @@
 //package org.example.socket_v2.server;
 //
-//// table is ExampleEntity
+/// / table is ExampleEntity
 //public class ExampleEntity {
 //    // table id
 //    private Long id;

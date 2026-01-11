@@ -37,7 +37,7 @@ public class ServerHandler {
                     String endIndices = sc.nextLine();
                     out.println(endIndices);
 
-                    String res =in.readLine();
+                    String res = in.readLine();
 
                     String res1 = in.readLine();
 
@@ -65,7 +65,7 @@ public class ServerHandler {
                     String operations = sc.nextLine();
                     out.println(operations);
 
-                    String res =in.readLine();
+                    String res = in.readLine();
 
                     String res1 = in.readLine();
 
@@ -83,7 +83,7 @@ public class ServerHandler {
 //                    System.out.println("enter id : ");
                     String id = sc.nextLine();
                     out.println(id);
-                    String res =in.readLine();
+                    String res = in.readLine();
 
                     String res1 = in.readLine();
 

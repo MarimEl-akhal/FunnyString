@@ -17,7 +17,7 @@ public class ExampleEntity {
      */
 
     //    ? get();
-    public T getById(long id, Class<T> clazz) throws InvocationTargetException, InstantiationException, IllegalAccessException;
+    T getById(long id, Class<T> clazz) throws InvocationTargetException, InstantiationException, IllegalAccessException;
 
     /*
     the inserted object class name is the table name
@@ -31,5 +31,5 @@ public class ExampleEntity {
    }
      */
 //    insert(?)
-    public void insert(T entity);
+    void insert(T entity);
 }

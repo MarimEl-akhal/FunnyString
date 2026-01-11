@@ -3,10 +3,10 @@ package org.example.strategy;
 import java.io.PrintWriter;
 
 public class PrintWriterStrategy implements OutputStrategy {
-    private PrintWriter printWriter;
+    private final PrintWriter printWriter;
 
-    public PrintWriterStrategy(PrintWriter printWriter){
-        this.printWriter=printWriter;
+    public PrintWriterStrategy(PrintWriter printWriter) {
+        this.printWriter = printWriter;
     }
 
     @Override

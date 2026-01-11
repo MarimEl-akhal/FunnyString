@@ -16,7 +16,7 @@
 //    public OperationRangeEntityMapper() {
 //        this.parsing = FactoryDependency.getDependency(Parsing.class);
 //    }
-////
+/// /
 //    public List<OperationRangeEntity> toEntity(OperationRangeEntityRequest operationRangeEntityRequest, long funnyStringId) {
 //        List<OperationRangeEntity> operationRangeEntities = new ArrayList<>();
 //

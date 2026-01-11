@@ -1,16 +1,15 @@
 package org.example.strategy;
 
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 
 
 public class BufferReaderStrategy implements InputStrategy {
-    private BufferedReader reader;
+    private final BufferedReader reader;
 
-    public BufferReaderStrategy(BufferedReader reader){
-        this.reader=reader;
+    public BufferReaderStrategy(BufferedReader reader) {
+        this.reader = reader;
     }
 
     @Override

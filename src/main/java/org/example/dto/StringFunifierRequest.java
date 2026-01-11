@@ -1,9 +1,5 @@
 package org.example.dto;
 
-import org.example.operator.Operation;
-
-import java.util.List;
-
 public class StringFunifierRequest {
     private String boringString;
     private String startIndices;
