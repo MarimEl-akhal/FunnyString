@@ -1,17 +1,15 @@
-package org.example.factory;
-
-import org.example.stringStrategy.StringFunifierContext;
-
-import java.io.IOException;
-
-public class StringFunifierContextFactory implements BaseFactory<StringFunifierContext> {
-    private StringFunifierContext stringFunifierContext;
-
-    @Override
-    public StringFunifierContext createInstance() throws IOException {
-        if (stringFunifierContext == null) {
-            stringFunifierContext = new StringFunifierContext();
-        }
-        return stringFunifierContext;
-    }
-}
+//package org.example.factory;
+//
+//import java.io.IOException;
+//
+//public class StringFunifierContextFactory implements BaseFactory<StringFunifierContext> {
+//    private StringFunifierContext stringFunifierContext;
+//
+//    @Override
+//    public StringFunifierContext createInstance() throws IOException {
+//        if (stringFunifierContext == null) {
+//            stringFunifierContext = new StringFunifierContext();
+//        }
+//        return stringFunifierContext;
+//    }
+//}

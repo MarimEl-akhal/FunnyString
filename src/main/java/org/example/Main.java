@@ -17,7 +17,7 @@ public class Main {
         InputStrategy in = new ScannerStrategy(sc);
         OutputStrategy out = new PrintStanderStrategy();
 
-        Service service = FactoryDependency.getDependency(Service.class);
+        Router service = FactoryDependency.getDependency(Router.class);
 
         service.execute(in, out);
 

@@ -1,44 +1,48 @@
 package org.example.stringStrategy;
 
 import org.example.database.DataBaseManager;
-import org.example.dto.StringFunifierRequest;
-import org.example.dto.StringFunifierResponse;
+import org.example.dto.request.StringFunifierRetrieverRequest;
+import org.example.dto.response.StringFunifierRetrieverResponse;
 import org.example.entity.FunnyStringEntity;
 import org.example.factory.FactoryDependency;
-import org.example.mapper.FunnyStringEntityMapper;
+import org.example.mapper.StringFunifierRetrieverMapper;
+import org.example.socket_v2.server.ClientOption;
 import org.example.strategy.input.InputStrategy;
 import org.example.strategy.output.OutputStrategy;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
-public class StringFunifierIdRetrieverStrategy implements Strategy {
+public class StringFunifierIdRetrieverStrategy extends StringFunifierStrategy<StringFunifierRetrieverRequest, StringFunifierRetrieverResponse> {
     private final DataBaseManager dbManager;
-    private final FunnyStringEntityMapper mapper;
+    private final StringFunifierRetrieverMapper mapper;
 
-    private StringFunifierRequest stringFunifierRequest;
+    private StringFunifierRetrieverRequest stringFunifierRequest;
 
     private FunnyStringEntity funnyStringEntity;
 
+
     public StringFunifierIdRetrieverStrategy() {
         this.dbManager = FactoryDependency.getDependency(DataBaseManager.class);
-        this.mapper = FactoryDependency.getDependency(FunnyStringEntityMapper.class);
+        this.mapper = FactoryDependency.getDependency(StringFunifierRetrieverMapper.class);
     }
 
+
     @Override
-    public void setInput(InputStrategy inputStrategy) throws IOException {
+    public StringFunifierRetrieverRequest setInput(InputStrategy inputStrategy) throws IOException {
         String id = inputStrategy.read();
-        stringFunifierRequest = new StringFunifierRequest();
-        stringFunifierRequest.setFunnyId(id);
+        stringFunifierRequest = new StringFunifierRetrieverRequest();
+        stringFunifierRequest.setId(id);
+        return  stringFunifierRequest;
     }
 
     @Override
-    public StringFunifierResponse executeScenario(StringFunifierRequest request) {
-        long id = Long.parseLong(stringFunifierRequest.getFunnyId());
+    public StringFunifierRetrieverResponse executeScenario(StringFunifierRetrieverRequest request) {
+        long id = Long.parseLong(stringFunifierRequest.getId());
         try {
             funnyStringEntity = (FunnyStringEntity) dbManager.getById(id, FunnyStringEntity.class);
             if (funnyStringEntity == null) {
-               return mapper.toResponseFail(id);
+                return mapper.toResponseFail(id);
             }
 
         } catch (InvocationTargetException | InstantiationException | IllegalAccessException e) {
@@ -49,19 +53,15 @@ public class StringFunifierIdRetrieverStrategy implements Strategy {
     }
 
     @Override
-    public void receiveOutPutMessage(OutputStrategy outputStrategy) {
-        StringFunifierResponse response = executeScenario(stringFunifierRequest);
+    public void sendOutPutMessage(StringFunifierRetrieverResponse response, OutputStrategy outputStrategy) {
         outputStrategy.print("FunnyId: " + response.getFunnyId());
         outputStrategy.print("BoringString: " + response.getBoringString());
-        outputStrategy.print("FunRange: " + response.getFunRange());
+        outputStrategy.print("FunRange: " + response.getFunRangeString());
         outputStrategy.print("FunnyString: " + response.getFunnyString());
     }
 
     @Override
-    public void run(InputStrategy inputStrategy, OutputStrategy outputStrategy) throws IOException {
-        setInput(inputStrategy);
-        executeScenario(stringFunifierRequest);
-        receiveOutPutMessage(outputStrategy);
+    public ClientOption getOptionName() {
+        return ClientOption.GET_FUNRANGEBYID;
     }
-
 }

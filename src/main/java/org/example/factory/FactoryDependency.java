@@ -1,15 +1,19 @@
 package org.example.factory;
 
-import org.example.Service;
+import org.example.Router;
 import org.example.StringFunifier;
-import org.example.stringStrategy.StringFunifierContext;
 import org.example.database.DataBaseManager;
 import org.example.entity.FunnyStringEntity;
 import org.example.entity.OperationRangeEntity;
-import org.example.mapper.FunnyStringEntityMapper;
+import org.example.mapper.FunRangeMapper;
+import org.example.mapper.FunnyStringMapper;
+import org.example.mapper.StringFunifierRetrieverMapper;
 import org.example.operator.StringOperator;
 import org.example.parsingg.Parsing;
 import org.example.socket_v2.server.ClientRequest;
+import org.example.stringStrategy.FunRangeStrategy;
+import org.example.stringStrategy.FunnyStringStrategy;
+import org.example.stringStrategy.StringFunifierIdRetrieverStrategy;
 
 import java.io.IOException;
 
@@ -43,21 +47,45 @@ public class FactoryDependency {
             } catch (IOException e) {
                 System.err.println(e);
             }
-        } else if (className == Service.class) {
+        } else if (className == Router.class) {
             try {
-                return (T) new ServiceFactory().createInstance();
+                return (T) new RouterFactory().createInstance();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        } else if (className == FunnyStringEntityMapper.class) {
+        } else if (className == FunnyStringMapper.class) {
             try {
-                return (T) new FunnyStringEntityMapperFactory().createInstance();
+                return (T) new FunnyStringMapperFactory().createInstance();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        } else if (className == StringFunifierContext.class) {
+        } else if (className == FunRangeMapper.class) {
             try {
-                return (T) new StringFunifierContextFactory().createInstance();
+                return (T) new FunRangeMapperFactory().createInstance();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else if (className == StringFunifierRetrieverMapper.class) {
+            try {
+                return (T) new StringFunifierRetrieverMapperFactory().createInstance();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else if (className == StringFunifierIdRetrieverStrategy.class) {
+            try {
+                return (T) new StringFunifierRetrieverFactory().createInstance();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else if (className == FunnyStringStrategy.class) {
+            try {
+                return (T) new FunnyStringStrategyFactory().createInstance();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else if (className == FunRangeStrategy.class) {
+            try {
+                return (T) new FunRangeStrategyFactory().createInstance();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

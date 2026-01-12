@@ -1,7 +1,7 @@
 package org.example.socket_v2.server;
 
 
-import org.example.Service;
+import org.example.Router;
 import org.example.factory.FactoryDependency;
 import org.example.strategy.input.BufferReaderStrategy;
 import org.example.strategy.input.InputStrategy;
@@ -21,7 +21,7 @@ public class ClientRequest {
     private final PrintWriter out;
     private final BufferedReader in;
 
-    private final Service service;
+    private final Router service;
 
     public ClientRequest(Socket socket) throws IOException {
 
@@ -31,7 +31,7 @@ public class ClientRequest {
         // Takes input from the client socket
         this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-        this.service = FactoryDependency.getDependency(Service.class);
+        this.service = FactoryDependency.getDependency(Router.class);
 
 
     }

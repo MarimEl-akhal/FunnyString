@@ -1,0 +1,17 @@
+package org.example.factory;
+
+import org.example.Router;
+
+import java.io.IOException;
+
+public class RouterFactory implements BaseFactory<Router> {
+    private Router router;
+
+    @Override
+    public Router createInstance() throws IOException {
+        if (router == null) {
+            router = new Router();
+        }
+        return router;
+    }
+}

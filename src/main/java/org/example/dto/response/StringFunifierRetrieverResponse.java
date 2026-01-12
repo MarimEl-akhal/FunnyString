@@ -1,10 +1,18 @@
-package org.example.dto;
+package org.example.dto.response;
 
-public class StringFunifierResponse {
+public class StringFunifierRetrieverResponse {
     private long funnyId;
     private String boringString;
+    private String funRangeString;
     private String funnyString;
-    private String funRange;
+
+    public String getFunRangeString() {
+        return funRangeString;
+    }
+
+    public void setFunRangeString(String funRangeString) {
+        this.funRangeString = funRangeString;
+    }
 
     public long getFunnyId() {
         return funnyId;
@@ -29,14 +37,4 @@ public class StringFunifierResponse {
     public void setFunnyString(String funnyString) {
         this.funnyString = funnyString;
     }
-
-    public String getFunRange() {
-        return funRange;
-    }
-
-    public void setFunRange(String funRange) {
-        this.funRange = funRange;
-    }
 }
-
-
