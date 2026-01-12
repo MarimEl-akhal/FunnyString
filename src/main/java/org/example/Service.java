@@ -45,6 +45,10 @@ public class Service {
             String option = inputStrategy.read().toUpperCase();
             switch (ClientOption.valueOf(option)) {
                 case FUNRANGE -> {
+                    // abstraction.run(inputStrategy, outputStrategy);
+                        // abstraction.input(inputStrategy);
+                        // abstraction.process()
+                        // abstraction.output()
                     String boringString = inputStrategy.read();
                     String start = inputStrategy.read();
                     String end = inputStrategy.read();
@@ -54,8 +58,8 @@ public class Service {
                     stringFunifierRequest.setStartIndices(start);
                     stringFunifierRequest.setEndIndices(end);
 
-//                    StringFunifierResponse response = FunRangeScenario(stringFunifierRequest);
-                    StringFunifierResponse response = scenario(stringFunifierRequest,option);
+                    StringFunifierResponse response = FunRangeScenario(stringFunifierRequest);
+//                    StringFunifierResponse response = scenario(stringFunifierRequest,option);
                     outputStrategy.print("FunnyId: " + response.getFunnyId());
                     outputStrategy.print("BoringString: " + response.getBoringString());
                     outputStrategy.print("FunRange: " + response.getFunRange());
