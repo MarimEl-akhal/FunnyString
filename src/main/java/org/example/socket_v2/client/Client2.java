@@ -7,6 +7,7 @@ import java.net.Socket;
 public class Client2 {
     private Socket clientSocket;
     private ServerHandler serverHandler;
+
     public Client2() {
     }
 

@@ -3,10 +3,10 @@ package org.example.socket_v2.server;
 
 import org.example.Service;
 import org.example.factory.FactoryDependency;
-import org.example.strategy.BufferReaderStrategy;
-import org.example.strategy.InputStrategy;
-import org.example.strategy.OutputStrategy;
-import org.example.strategy.PrintWriterStrategy;
+import org.example.strategy.input.BufferReaderStrategy;
+import org.example.strategy.input.InputStrategy;
+import org.example.strategy.output.OutputStrategy;
+import org.example.strategy.output.PrintWriterStrategy;
 
 import java.io.BufferedReader;
 import java.io.IOException;

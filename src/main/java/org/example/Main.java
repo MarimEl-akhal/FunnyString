@@ -1,10 +1,10 @@
 package org.example;
 
 import org.example.factory.FactoryDependency;
-import org.example.strategy.InputStrategy;
-import org.example.strategy.OutputStrategy;
-import org.example.strategy.PrintStanderStrategy;
-import org.example.strategy.ScannerStrategy;
+import org.example.strategy.input.InputStrategy;
+import org.example.strategy.output.OutputStrategy;
+import org.example.strategy.output.PrintStanderStrategy;
+import org.example.strategy.input.ScannerStrategy;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;

@@ -15,16 +15,18 @@ import java.net.Socket;
 import java.util.List;
 
 public class Server {
+    private final IParsing parsing;
+    private final StringFunifier funnyString;
+
     private ServerSocket serverSocket;
     private Socket clientSocket;
     private PrintWriter out;
     private BufferedReader in;
 
-    private final IParsing parsing = FactoryDependency.getDependency(Parsing.class);
-    private final StringFunifier funnyString = FactoryDependency.getDependency(StringFunifier.class);
-
 
     public Server(int port) {
+        this.parsing = FactoryDependency.getDependency(Parsing.class);
+        this.funnyString = FactoryDependency.getDependency(StringFunifier.class);
         try {
             serverSocket = new ServerSocket(port);
             System.out.println("Server started");

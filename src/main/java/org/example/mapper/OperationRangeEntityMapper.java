@@ -37,8 +37,8 @@
 //    }
 //
 //}
-////funrange
-////mksgdgudddddddddddddd
-////1, 5, 7, 11, 13
-////3, 5, 10, 12, 14
-////"REVERSE", "UPPERCASE", "SORT", "LOWERCASE", "COMPRESSION"
+/// /funrange
+/// /mksgdgudddddddddddddd
+/// /1, 5, 7, 11, 13
+/// /3, 5, 10, 12, 14
+/// /"REVERSE", "UPPERCASE", "SORT", "LOWERCASE", "COMPRESSION"

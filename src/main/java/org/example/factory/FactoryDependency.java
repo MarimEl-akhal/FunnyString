@@ -2,6 +2,7 @@ package org.example.factory;
 
 import org.example.Service;
 import org.example.StringFunifier;
+import org.example.abstraction.StringFunifierContext;
 import org.example.database.DataBaseManager;
 import org.example.entity.FunnyStringEntity;
 import org.example.entity.OperationRangeEntity;
@@ -51,6 +52,12 @@ public class FactoryDependency {
         } else if (className == FunnyStringEntityMapper.class) {
             try {
                 return (T) new FunnyStringEntityMapperFactory().createInstance();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else if (className == StringFunifierContext.class) {
+            try {
+                return (T) new StringFunifierContextFactory().createInstance();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

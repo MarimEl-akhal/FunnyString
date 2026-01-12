@@ -1,4 +1,4 @@
-package org.example.strategy;
+package org.example.strategy.output;
 
 import java.io.PrintWriter;
 
