@@ -1,4 +1,4 @@
-package org.example.abstraction;
+package org.example.stringStrategy;
 
 import org.example.dto.StringFunifierRequest;
 import org.example.dto.StringFunifierResponse;

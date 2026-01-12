@@ -2,7 +2,7 @@ package org.example.factory;
 
 import org.example.Service;
 import org.example.StringFunifier;
-import org.example.abstraction.StringFunifierContext;
+import org.example.stringStrategy.StringFunifierContext;
 import org.example.database.DataBaseManager;
 import org.example.entity.FunnyStringEntity;
 import org.example.entity.OperationRangeEntity;

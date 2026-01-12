@@ -1,6 +1,6 @@
 package org.example.factory;
 
-import org.example.abstraction.StringFunifierContext;
+import org.example.stringStrategy.StringFunifierContext;
 
 import java.io.IOException;
 

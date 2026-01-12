@@ -1,9 +1,9 @@
 package org.example;
 
-import org.example.abstraction.FunRangeStrategy;
-import org.example.abstraction.FunnyStringStrategy;
-import org.example.abstraction.StringFunifierContext;
-import org.example.abstraction.StringFunifierIdRetrieverStrategy;
+import org.example.stringStrategy.FunRangeStrategy;
+import org.example.stringStrategy.FunnyStringStrategy;
+import org.example.stringStrategy.StringFunifierContext;
+import org.example.stringStrategy.StringFunifierIdRetrieverStrategy;
 import org.example.factory.FactoryDependency;
 import org.example.socket_v2.server.ClientOption;
 import org.example.strategy.input.InputStrategy;

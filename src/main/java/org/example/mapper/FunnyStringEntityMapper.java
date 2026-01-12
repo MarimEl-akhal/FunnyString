@@ -15,12 +15,13 @@ public class FunnyStringEntityMapper {
         return response;
     }
 
-//    public FunnyStringEntity toEntity(StringFunifierResponse funnyStringEntityRequest) {
-//        FunnyStringEntity funnyStringEntity = new FunnyStringEntity();
-//        funnyStringEntity.setBoringString(funnyStringEntityRequest.getBoringString());
-//        funnyStringEntity.setFunnyString(funnyStringEntityRequest.getFunnyString());
-//        funnyStringEntity.setFunRange(funnyStringEntityRequest.getFunRange());
-//
-//        return funnyStringEntity;
-//    }
+    public StringFunifierResponse toResponseFail(long id) {
+        StringFunifierResponse response = new StringFunifierResponse();
+        response.setFunnyId(id);
+        response.setBoringString("No data Found for id " + id);
+        response.setFunRange("No data Found for id " + id);
+        response.setFunnyString("No data Found for id " + id);
+
+        return response;
+    }
 }

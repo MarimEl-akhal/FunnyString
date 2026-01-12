@@ -1,4 +1,4 @@
-package org.example.abstraction;
+package org.example.stringStrategy;
 
 import org.example.database.DataBaseManager;
 import org.example.dto.StringFunifierRequest;
@@ -38,7 +38,7 @@ public class StringFunifierIdRetrieverStrategy implements Strategy {
         try {
             funnyStringEntity = (FunnyStringEntity) dbManager.getById(id, FunnyStringEntity.class);
             if (funnyStringEntity == null) {
-                throw new Error("No data found for id " + id);
+               return mapper.toResponseFail(id);
             }
 
         } catch (InvocationTargetException | InstantiationException | IllegalAccessException e) {
