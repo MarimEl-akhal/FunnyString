@@ -6,6 +6,7 @@ import org.example.strategy.input.InputStrategy;
 import org.example.strategy.output.OutputStrategy;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 public class Router {
@@ -17,15 +18,12 @@ public class Router {
             InputStrategy inputStrategy,
             OutputStrategy outputStrategy
     ) throws IOException {
-        StringFunifierStrategy funRangeStrategy = FactoryDependency.getDependency(FunRangeStrategy.class);
-        StringFunifierStrategy funnyStringStrategy = FactoryDependency.getDependency(FunnyStringStrategy.class);
-        StringFunifierStrategy funifierIdRetrieverStrategy = FactoryDependency.getDependency(StringFunifierIdRetrieverStrategy.class);
-        List<StringFunifierStrategy> stringFunifierStrategies = List.of(funRangeStrategy,funnyStringStrategy,funifierIdRetrieverStrategy);
+        List<RouterStrategy> routerStrategies = Collections.singletonList(FactoryDependency.getDependency(RouterStrategy.class));
 
         while (true) {
             String option = inputStrategy.read().toUpperCase();
 
-            for (StringFunifierStrategy strategy : stringFunifierStrategies) {
+            for (RouterStrategy strategy : routerStrategies) {
                 if (option.equals(strategy.getOptionName().name())) {
                     strategy.run(inputStrategy, outputStrategy);
                     break;

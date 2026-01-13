@@ -8,7 +8,7 @@ public class FunnyEntityFactory implements BaseFactory<FunnyStringEntity> {
     private FunnyStringEntity funnyStringEntity;
 
     @Override
-    public FunnyStringEntity createInstance() throws IOException {
+    public FunnyStringEntity createInstance()  {
         if (funnyStringEntity == null) {
             funnyStringEntity = new FunnyStringEntity();
         }

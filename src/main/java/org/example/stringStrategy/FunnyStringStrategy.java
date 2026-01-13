@@ -18,7 +18,7 @@ import org.example.strategy.output.OutputStrategy;
 import java.io.IOException;
 import java.util.List;
 
-public class FunnyStringStrategy extends StringFunifierStrategy<FunnyStringRequest,FunnyStringResponse> {
+public class FunnyStringStrategy extends RouterStrategy<FunnyStringRequest,FunnyStringResponse> {
     private final IParsing parsing;
     private final StringFunifier funnyString;
     private final DataBaseManager dbManager;

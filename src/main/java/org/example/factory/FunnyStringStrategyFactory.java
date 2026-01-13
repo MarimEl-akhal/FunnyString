@@ -8,7 +8,7 @@ public class FunnyStringStrategyFactory implements BaseFactory<FunnyStringStrate
     private FunnyStringStrategy funnyStringStrategy;
 
     @Override
-    public FunnyStringStrategy createInstance() throws IOException {
+    public FunnyStringStrategy createInstance() {
         if (funnyStringStrategy == null) {
             funnyStringStrategy = new FunnyStringStrategy();
         }

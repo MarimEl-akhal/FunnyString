@@ -13,7 +13,7 @@ import org.example.strategy.output.OutputStrategy;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
-public class StringFunifierIdRetrieverStrategy extends StringFunifierStrategy<StringFunifierRetrieverRequest, StringFunifierRetrieverResponse> {
+public class StringFunifierIdRetrieverStrategy extends RouterStrategy<StringFunifierRetrieverRequest, StringFunifierRetrieverResponse> {
     private final DataBaseManager dbManager;
     private final StringFunifierRetrieverMapper mapper;
 

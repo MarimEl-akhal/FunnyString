@@ -17,7 +17,7 @@ import org.example.strategy.output.OutputStrategy;
 import java.io.IOException;
 import java.util.List;
 
-public class FunRangeStrategy extends StringFunifierStrategy<FunRangeRequest, FunRangeResponse> {
+public class FunRangeStrategy extends RouterStrategy<FunRangeRequest, FunRangeResponse> {
 
     private final IParsing parsing;
     private final StringFunifier funnyString;

@@ -8,7 +8,7 @@ public class FunnyStringMapperFactory implements BaseFactory<FunnyStringMapper> 
     private FunnyStringMapper mapper;
 
     @Override
-    public FunnyStringMapper createInstance() throws IOException {
+    public FunnyStringMapper createInstance()  {
         if (mapper == null) {
             mapper = new FunnyStringMapper();
         }

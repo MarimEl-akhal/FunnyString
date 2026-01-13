@@ -8,7 +8,7 @@ public class RouterFactory implements BaseFactory<Router> {
     private Router router;
 
     @Override
-    public Router createInstance() throws IOException {
+    public Router createInstance()  {
         if (router == null) {
             router = new Router();
         }

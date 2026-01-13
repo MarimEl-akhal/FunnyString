@@ -15,10 +15,15 @@ import org.example.stringStrategy.FunRangeStrategy;
 import org.example.stringStrategy.FunnyStringStrategy;
 import org.example.stringStrategy.StringFunifierIdRetrieverStrategy;
 
-import java.io.IOException;
-
 
 public class FactoryDependency {
+    static {
+        // study static blocks
+        map {
+            class,dependency
+        } ;
+    }
+
     public static <T> T getDependency(Class<T> className) {
 
         if (className == StringOperator.class) {
@@ -30,65 +35,27 @@ public class FactoryDependency {
         } else if (className == DataBaseManager.class) {
             return (T) new DataBaseManagerFactory().createInstance();
         } else if (className == FunnyStringEntity.class) {
-            try {
-                return (T) new FunnyEntityFactory().createInstance();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            return (T) new FunnyEntityFactory().createInstance();
         } else if (className == OperationRangeEntity.class) {
-            try {
-                return (T) new OperationRangeEntityFactory().createInstance();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            return (T) new OperationRangeEntityFactory().createInstance();
         } else if (className == ClientRequest.class) {
-            try {
-                return (T) new ClientRequestFactory().createInstance();
-            } catch (IOException e) {
-                System.err.println(e);
-            }
+            return (T) new ClientRequestFactory().createInstance();
         } else if (className == Router.class) {
-            try {
-                return (T) new RouterFactory().createInstance();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            return (T) new RouterFactory().createInstance();
         } else if (className == FunnyStringMapper.class) {
-            try {
-                return (T) new FunnyStringMapperFactory().createInstance();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            return (T) new FunnyStringMapperFactory().createInstance();
         } else if (className == FunRangeMapper.class) {
-            try {
-                return (T) new FunRangeMapperFactory().createInstance();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            return (T) new FunRangeMapperFactory().createInstance();
         } else if (className == StringFunifierRetrieverMapper.class) {
-            try {
-                return (T) new StringFunifierRetrieverMapperFactory().createInstance();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            return (T) new StringFunifierRetrieverMapperFactory().createInstance();
         } else if (className == StringFunifierIdRetrieverStrategy.class) {
-            try {
-                return (T) new StringFunifierRetrieverFactory().createInstance();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            return (T) new StringFunifierRetrieverFactory().createInstance();
         } else if (className == FunnyStringStrategy.class) {
-            try {
-                return (T) new FunnyStringStrategyFactory().createInstance();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            return (T) new FunnyStringStrategyFactory().createInstance();
         } else if (className == FunRangeStrategy.class) {
-            try {
-                return (T) new FunRangeStrategyFactory().createInstance();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            return (T) new FunRangeStrategyFactory().createInstance();
+        }else if (className == RouterStrategyFactory.class) {
+
         }
 
         return null;

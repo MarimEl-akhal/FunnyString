@@ -8,7 +8,7 @@ public class OperationRangeEntityFactory implements BaseFactory<OperationRangeEn
     private OperationRangeEntity operationRange;
 
     @Override
-    public OperationRangeEntity createInstance() throws IOException {
+    public OperationRangeEntity createInstance() {
         if (operationRange == null) {
             operationRange = new OperationRangeEntity();
         }

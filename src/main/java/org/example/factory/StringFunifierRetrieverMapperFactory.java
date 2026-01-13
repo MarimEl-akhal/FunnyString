@@ -9,7 +9,7 @@ public class StringFunifierRetrieverMapperFactory implements BaseFactory<StringF
     private StringFunifierRetrieverMapper mapper;
 
     @Override
-    public StringFunifierRetrieverMapper createInstance() throws IOException {
+    public StringFunifierRetrieverMapper createInstance() {
         if (mapper == null) {
             mapper = new StringFunifierRetrieverMapper();
         }

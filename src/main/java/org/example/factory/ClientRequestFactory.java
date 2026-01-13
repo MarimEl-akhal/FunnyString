@@ -9,9 +9,13 @@ public class ClientRequestFactory implements BaseFactory<ClientRequest> {
     private ClientRequest clientRequest;
 
     @Override
-    public ClientRequest createInstance() throws IOException {
+    public ClientRequest createInstance() {
         if (clientRequest == null) {
-            return new ClientRequest(new Socket());
+            try {
+                return new ClientRequest(new Socket());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
         return clientRequest;
     }

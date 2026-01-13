@@ -9,7 +9,7 @@ public class FunRangeMapperFactory implements BaseFactory<FunRangeMapper> {
     private FunRangeMapper mapper;
 
     @Override
-    public FunRangeMapper createInstance() throws IOException {
+    public FunRangeMapper createInstance()  {
         if (mapper == null) {
             mapper = new FunRangeMapper();
         }
