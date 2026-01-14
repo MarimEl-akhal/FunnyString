@@ -1,8 +1,7 @@
-package org.example.factory;
+package org.example.factory.mapperfactory;
 
+import org.example.factory.BaseFactory;
 import org.example.mapper.FunnyStringMapper;
-
-import java.io.IOException;
 
 public class FunnyStringMapperFactory implements BaseFactory<FunnyStringMapper> {
     private FunnyStringMapper mapper;

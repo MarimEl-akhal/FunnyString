@@ -1,9 +1,7 @@
-package org.example.factory;
+package org.example.factory.mapperfactory;
 
-import org.example.mapper.FunRangeMapper;
+import org.example.factory.BaseFactory;
 import org.example.mapper.StringFunifierRetrieverMapper;
-
-import java.io.IOException;
 
 public class StringFunifierRetrieverMapperFactory implements BaseFactory<StringFunifierRetrieverMapper> {
     private StringFunifierRetrieverMapper mapper;

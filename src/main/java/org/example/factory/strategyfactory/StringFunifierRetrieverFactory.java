@@ -1,10 +1,9 @@
-package org.example.factory;
+package org.example.factory.strategyfactory;
 
+import org.example.factory.BaseFactory;
 import org.example.stringStrategy.StringFunifierIdRetrieverStrategy;
 
-import java.io.IOException;
-
-public class StringFunifierRetrieverFactory implements BaseFactory<StringFunifierIdRetrieverStrategy>{
+public class StringFunifierRetrieverFactory implements BaseFactory<StringFunifierIdRetrieverStrategy> {
     private StringFunifierIdRetrieverStrategy retrieverStrategy;
 
     @Override

@@ -1,6 +1,7 @@
-package org.example.factory;
+package org.example.factory.strategyfactory;
 
 import org.example.StringFunifier;
+import org.example.factory.BaseFactory;
 
 public class StringFunifierFactory implements BaseFactory<StringFunifier> {
     private StringFunifier stringFunifier;

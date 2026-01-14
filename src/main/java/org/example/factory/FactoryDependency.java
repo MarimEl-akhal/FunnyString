@@ -3,62 +3,52 @@ package org.example.factory;
 import org.example.Router;
 import org.example.StringFunifier;
 import org.example.database.DataBaseManager;
-import org.example.entity.FunnyStringEntity;
-import org.example.entity.OperationRangeEntity;
+
+import org.example.decorator.StringComponent;
+import org.example.decorator.StringDecorator;
+
+import org.example.factory.decoratorfactory.ChainDecoratorFactory;
+import org.example.factory.mapperfactory.FunRangeMapperFactory;
+import org.example.factory.mapperfactory.StringFunifierRetrieverMapperFactory;
+import org.example.factory.strategyfactory.*;
 import org.example.mapper.FunRangeMapper;
 import org.example.mapper.FunnyStringMapper;
 import org.example.mapper.StringFunifierRetrieverMapper;
 import org.example.operator.StringOperator;
 import org.example.parsingg.Parsing;
-import org.example.socket_v2.server.ClientRequest;
 import org.example.stringStrategy.FunRangeStrategy;
 import org.example.stringStrategy.FunnyStringStrategy;
+import org.example.stringStrategy.RouterStrategyContext;
 import org.example.stringStrategy.StringFunifierIdRetrieverStrategy;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class FactoryDependency {
+
+
+    private static Map<Class, BaseFactory> map = new HashMap<>();
+
     static {
-        // study static blocks
-        map {
-            class,dependency
-        } ;
+        map.put(StringOperator.class, new StringOperatorFactory());
+        map.put(StringFunifier.class, new StringFunifierFactory());
+        map.put(Parsing.class, new ParsingFactory());
+        map.put(DataBaseManager.class, new DataBaseManagerFactory());
+        map.put(Router.class, new RouterFactory());
+        map.put(FunnyStringMapper.class, new FunRangeMapperFactory());
+        map.put(FunRangeMapper.class, new FunRangeMapperFactory());
+        map.put(StringFunifierRetrieverMapper.class, new StringFunifierRetrieverMapperFactory());
+        map.put(StringFunifierIdRetrieverStrategy.class, new StringFunifierRetrieverFactory());
+        map.put(FunnyStringStrategy.class, new FunnyStringStrategyFactory());
+        map.put(FunRangeStrategy.class, new FunRangeStrategyFactory());
+        map.put(RouterStrategyContext.class, new RouterStrategyContextFactory());
+        map.put(StringComponent.class, new ChainDecoratorFactory());
+
     }
 
     public static <T> T getDependency(Class<T> className) {
-
-        if (className == StringOperator.class) {
-            return (T) new StringOperatorFactory().createInstance();
-        } else if (className == StringFunifier.class) {
-            return (T) new StringFunifierFactory().createInstance();
-        } else if (className == Parsing.class) {
-            return (T) new ParsingFactory().createInstance();
-        } else if (className == DataBaseManager.class) {
-            return (T) new DataBaseManagerFactory().createInstance();
-        } else if (className == FunnyStringEntity.class) {
-            return (T) new FunnyEntityFactory().createInstance();
-        } else if (className == OperationRangeEntity.class) {
-            return (T) new OperationRangeEntityFactory().createInstance();
-        } else if (className == ClientRequest.class) {
-            return (T) new ClientRequestFactory().createInstance();
-        } else if (className == Router.class) {
-            return (T) new RouterFactory().createInstance();
-        } else if (className == FunnyStringMapper.class) {
-            return (T) new FunnyStringMapperFactory().createInstance();
-        } else if (className == FunRangeMapper.class) {
-            return (T) new FunRangeMapperFactory().createInstance();
-        } else if (className == StringFunifierRetrieverMapper.class) {
-            return (T) new StringFunifierRetrieverMapperFactory().createInstance();
-        } else if (className == StringFunifierIdRetrieverStrategy.class) {
-            return (T) new StringFunifierRetrieverFactory().createInstance();
-        } else if (className == FunnyStringStrategy.class) {
-            return (T) new FunnyStringStrategyFactory().createInstance();
-        } else if (className == FunRangeStrategy.class) {
-            return (T) new FunRangeStrategyFactory().createInstance();
-        }else if (className == RouterStrategyFactory.class) {
-
-        }
-
-        return null;
+        return (T) map.get(className).createInstance();
     }
 }
 

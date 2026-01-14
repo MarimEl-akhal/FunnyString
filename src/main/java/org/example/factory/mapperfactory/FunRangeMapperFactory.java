@@ -1,9 +1,7 @@
-package org.example.factory;
+package org.example.factory.mapperfactory;
 
+import org.example.factory.BaseFactory;
 import org.example.mapper.FunRangeMapper;
-
-
-import java.io.IOException;
 
 public class FunRangeMapperFactory implements BaseFactory<FunRangeMapper> {
     private FunRangeMapper mapper;

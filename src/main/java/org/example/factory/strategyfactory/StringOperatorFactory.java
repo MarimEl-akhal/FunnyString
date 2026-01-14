@@ -1,5 +1,6 @@
-package org.example.factory;
+package org.example.factory.strategyfactory;
 
+import org.example.factory.BaseFactory;
 import org.example.operator.StringOperator;
 
 public class StringOperatorFactory implements BaseFactory<StringOperator> {

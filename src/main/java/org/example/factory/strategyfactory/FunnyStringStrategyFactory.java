@@ -1,8 +1,7 @@
-package org.example.factory;
+package org.example.factory.strategyfactory;
 
+import org.example.factory.BaseFactory;
 import org.example.stringStrategy.FunnyStringStrategy;
-
-import java.io.IOException;
 
 public class FunnyStringStrategyFactory implements BaseFactory<FunnyStringStrategy> {
     private FunnyStringStrategy funnyStringStrategy;

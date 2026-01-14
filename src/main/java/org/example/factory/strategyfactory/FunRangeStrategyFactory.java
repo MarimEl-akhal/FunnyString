@@ -1,8 +1,7 @@
-package org.example.factory;
+package org.example.factory.strategyfactory;
 
+import org.example.factory.BaseFactory;
 import org.example.stringStrategy.FunRangeStrategy;
-
-import java.io.IOException;
 
 public class FunRangeStrategyFactory implements BaseFactory<FunRangeStrategy> {
     private FunRangeStrategy funRangeStrategy;
