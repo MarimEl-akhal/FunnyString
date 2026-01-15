@@ -7,7 +7,7 @@ public class StringFunifierRetrieverFactory implements BaseFactory<StringFunifie
     private StringFunifierIdRetrieverStrategy retrieverStrategy;
 
     @Override
-    public StringFunifierIdRetrieverStrategy createInstance()  {
+    public StringFunifierIdRetrieverStrategy createInstance() {
         if (retrieverStrategy == null) {
             retrieverStrategy = new StringFunifierIdRetrieverStrategy();
         }

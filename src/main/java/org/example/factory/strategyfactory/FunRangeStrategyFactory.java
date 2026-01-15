@@ -7,7 +7,7 @@ public class FunRangeStrategyFactory implements BaseFactory<FunRangeStrategy> {
     private FunRangeStrategy funRangeStrategy;
 
     @Override
-    public FunRangeStrategy createInstance()  {
+    public FunRangeStrategy createInstance() {
         if (funRangeStrategy == null) {
             funRangeStrategy = new FunRangeStrategy();
         }

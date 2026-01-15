@@ -16,11 +16,10 @@ import org.example.socket_v2.server.ClientOption;
 import org.example.strategy.input.InputStrategy;
 import org.example.strategy.output.OutputStrategy;
 
-
 import java.io.IOException;
 import java.util.List;
 
-public class FunnyStringDecorator extends StringDecorator {
+public class FunnyStringDecorator extends Decorator {
     private final IParsing parsing;
     private final StringFunifier funnyString;
     private final DataBaseManager dbManager;
@@ -30,12 +29,12 @@ public class FunnyStringDecorator extends StringDecorator {
 
     private FunnyStringEntity funnyStringEntity;
 
-    public FunnyStringDecorator(StringComponent stringComponent) {
+    public FunnyStringDecorator(RouterStrategy stringComponent) {
         super(stringComponent);
         this.parsing = FactoryDependency.getDependency(Parsing.class);
         this.funnyString = FactoryDependency.getDependency(StringFunifier.class);
         this.dbManager = FactoryDependency.getDependency(DataBaseManager.class);
-        this.mapper = FactoryDependency.getDependency(FunnyStringMapper.class);
+        this.mapper =  FactoryDependency.getDependency(FunnyStringMapper.class);
     }
 
     @Override
@@ -44,7 +43,7 @@ public class FunnyStringDecorator extends StringDecorator {
         try {
             FunnyStringRequest request = setInput(inputStrategy);
             FunnyStringResponse response = executeScenario(request);
-            sendOutPutMessage(response,outputStrategy);
+            sendOutPutMessage(response, outputStrategy);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -53,10 +52,8 @@ public class FunnyStringDecorator extends StringDecorator {
 
     @Override
     public String getOptionName() {
-        super.getOptionName();
-         return  ClientOption.FUNNYSTRING.name();
+        return ClientOption.FUNNYSTRING.name();
     }
-
 
 
     private FunnyStringRequest setInput(InputStrategy inputStrategy) throws IOException {

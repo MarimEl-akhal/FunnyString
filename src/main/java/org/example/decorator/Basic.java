@@ -4,11 +4,12 @@ import org.example.socket_v2.server.ClientOption;
 import org.example.strategy.input.InputStrategy;
 import org.example.strategy.output.OutputStrategy;
 
-public class Basic implements StringComponent {
+public class Basic implements RouterStrategy {
     @Override
-    public void run(InputStrategy inputStrategy, OutputStrategy outputStrategy){
-        System.out.println("EXECUTE");
+    public void run(InputStrategy inputStrategy, OutputStrategy outputStrategy) {
+        System.out.print("");
     }
+
     @Override
     public String getOptionName() {
         return ClientOption.BASE.name();

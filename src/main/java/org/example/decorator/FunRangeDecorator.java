@@ -17,7 +17,7 @@ import org.example.strategy.output.OutputStrategy;
 import java.io.IOException;
 import java.util.List;
 
-public class FunRangeDecorator extends StringDecorator {
+public class FunRangeDecorator extends Decorator {
 
     private final IParsing parsing;
     private final StringFunifier funnyString;
@@ -29,7 +29,7 @@ public class FunRangeDecorator extends StringDecorator {
     private FunnyStringEntity funnyStringEntity;
 
 
-    public FunRangeDecorator(StringComponent stringComponent) {
+    public FunRangeDecorator(RouterStrategy stringComponent) {
         super(stringComponent);
         this.parsing = FactoryDependency.getDependency(Parsing.class);
         this.funnyString = FactoryDependency.getDependency(StringFunifier.class);
@@ -41,8 +41,7 @@ public class FunRangeDecorator extends StringDecorator {
 
     @Override
     public String getOptionName() {
-        super.getOptionName();
-       return ClientOption.FUNRANGE.name();
+        return ClientOption.FUNRANGE.name();
 
     }
 
@@ -52,7 +51,7 @@ public class FunRangeDecorator extends StringDecorator {
         try {
             FunRangeRequest request = setInput(inputStrategy);
             FunRangeResponse response = executeScenario(request);
-            sendOutPutMessage(response,outputStrategy);
+            sendOutPutMessage(response, outputStrategy);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

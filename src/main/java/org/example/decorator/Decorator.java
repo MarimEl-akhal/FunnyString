@@ -3,11 +3,11 @@ package org.example.decorator;
 import org.example.strategy.input.InputStrategy;
 import org.example.strategy.output.OutputStrategy;
 
-public abstract  class StringDecorator implements StringComponent {
-    protected StringComponent wrapper ;
+public abstract class Decorator implements RouterStrategy {
+    protected RouterStrategy wrapper;
 
-    public StringDecorator(StringComponent stringComponent){
-        this .wrapper = stringComponent;
+    public Decorator(RouterStrategy routerStrategy) {
+        this.wrapper = routerStrategy;
     }
 
     @Override
@@ -17,6 +17,6 @@ public abstract  class StringDecorator implements StringComponent {
 
     @Override
     public void run(InputStrategy in, OutputStrategy out) {
-        wrapper.run(in,out);
+        wrapper.run(in, out);
     }
 }

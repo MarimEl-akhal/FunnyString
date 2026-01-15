@@ -13,7 +13,7 @@ import org.example.strategy.output.OutputStrategy;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
-public class StringFunifierIdRetrieverDecorator extends StringDecorator {
+public class StringFunifierIdRetrieverDecorator extends Decorator {
     private final DataBaseManager dbManager;
     private final StringFunifierRetrieverMapper mapper;
 
@@ -22,7 +22,7 @@ public class StringFunifierIdRetrieverDecorator extends StringDecorator {
     private FunnyStringEntity funnyStringEntity;
 
 
-    public StringFunifierIdRetrieverDecorator(StringComponent routerStrategyStrategyDecorator) {
+    public StringFunifierIdRetrieverDecorator(RouterStrategy routerStrategyStrategyDecorator) {
         super(routerStrategyStrategyDecorator);
         this.dbManager = FactoryDependency.getDependency(DataBaseManager.class);
         this.mapper = FactoryDependency.getDependency(StringFunifierRetrieverMapper.class);
@@ -31,8 +31,7 @@ public class StringFunifierIdRetrieverDecorator extends StringDecorator {
 
     @Override
     public String getOptionName() {
-        super.getOptionName();
-        return  ClientOption.GET_FUNRANGEBYID.name();
+        return ClientOption.GET_FUNRANGEBYID.name();
     }
 
     @Override

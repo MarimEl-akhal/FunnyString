@@ -41,7 +41,7 @@ public class ClientRequest {
 
         InputStrategy input = new BufferReaderStrategy(in);
         OutputStrategy output = new PrintWriterStrategy(out);
-        service.execute(input, output);
+        service.execute(input,output);
 
     }
 }
