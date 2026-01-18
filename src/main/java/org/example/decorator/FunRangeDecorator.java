@@ -17,7 +17,7 @@ import org.example.strategy.output.OutputStrategy;
 import java.io.IOException;
 import java.util.List;
 
-public class FunRangeDecorator extends Decorator {
+public class FunRangeDecorator implements RouterStrategy<FunRangeRequest, FunRangeResponse> {
 
     private final IParsing parsing;
     private final StringFunifier funnyString;
@@ -29,8 +29,7 @@ public class FunRangeDecorator extends Decorator {
     private FunnyStringEntity funnyStringEntity;
 
 
-    public FunRangeDecorator(RouterStrategy stringComponent) {
-        super(stringComponent);
+    public FunRangeDecorator() {
         this.parsing = FactoryDependency.getDependency(Parsing.class);
         this.funnyString = FactoryDependency.getDependency(StringFunifier.class);
         this.dbManager = FactoryDependency.getDependency(DataBaseManager.class);
@@ -40,25 +39,13 @@ public class FunRangeDecorator extends Decorator {
 
 
     @Override
-    public String getOptionName() {
-        return ClientOption.FUNRANGE.name();
+    public ClientOption getOptionName() {
+        return ClientOption.FUNRANGE;
 
     }
 
     @Override
-    public void run(InputStrategy inputStrategy, OutputStrategy outputStrategy) {
-        super.run(inputStrategy, outputStrategy);
-        try {
-            FunRangeRequest request = setInput(inputStrategy);
-            FunRangeResponse response = executeScenario(request);
-            sendOutPutMessage(response, outputStrategy);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-
-    private FunRangeRequest setInput(InputStrategy inputStrategy) throws IOException {
+    public FunRangeRequest setInput(InputStrategy inputStrategy) throws IOException {
         String boringString = inputStrategy.read();
         String start = inputStrategy.read();
         String end = inputStrategy.read();
@@ -72,8 +59,8 @@ public class FunRangeDecorator extends Decorator {
         return funRangeRequest;
     }
 
-
-    private FunRangeResponse executeScenario(FunRangeRequest request) {
+    @Override
+    public FunRangeResponse executeScenario(FunRangeRequest request) {
         String boringString = request.getBoringString();
         List<Integer> startList = parsing.parseListOfIndexToken(request.getStartIndices());
         List<Integer> endList = parsing.parseListOfIndexToken(request.getEndIndices());
@@ -91,8 +78,8 @@ public class FunRangeDecorator extends Decorator {
         return response;
     }
 
-
-    private void sendOutPutMessage(FunRangeResponse response, OutputStrategy outputStrategy) {
+    @Override
+    public void sendOutPutMessage(FunRangeResponse response, OutputStrategy outputStrategy) {
         outputStrategy.print("FunnyId: " + response.getFunnyId());
         outputStrategy.print("BoringString: " + response.getBoringString());
         outputStrategy.print("FunRange: " + response.getFunRangeString());

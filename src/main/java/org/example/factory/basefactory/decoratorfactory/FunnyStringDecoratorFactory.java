@@ -1,8 +1,8 @@
-package org.example.factory.decoratorfactory;
+package org.example.factory.basefactory.decoratorfactory;
 
 import org.example.decorator.FunnyStringDecorator;
 import org.example.decorator.RouterStrategy;
-import org.example.factory.BaseFactory;
+import org.example.factory.basefactory.BaseFactory;
 
 
 public class FunnyStringDecoratorFactory implements BaseFactory<FunnyStringDecorator> {
@@ -12,7 +12,7 @@ public class FunnyStringDecoratorFactory implements BaseFactory<FunnyStringDecor
     @Override
     public FunnyStringDecorator createInstance() {
         if (funnyStringDecorator == null) {
-            funnyStringDecorator = new FunnyStringDecorator(stringComponent);
+            funnyStringDecorator = new FunnyStringDecorator();
         }
         return funnyStringDecorator;
     }

@@ -1,6 +1,6 @@
-package org.example.factory.mapperfactory;
+package org.example.factory.basefactory.mapperfactory;
 
-import org.example.factory.BaseFactory;
+import org.example.factory.basefactory.BaseFactory;
 import org.example.mapper.FunnyStringMapper;
 
 public class FunnyStringMapperFactory implements BaseFactory<FunnyStringMapper> {

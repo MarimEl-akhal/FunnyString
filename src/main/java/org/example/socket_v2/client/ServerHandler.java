@@ -1,9 +1,6 @@
 package org.example.socket_v2.client;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -18,6 +15,7 @@ public class ServerHandler {
         this.in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())); //input from server
         this.out = new PrintWriter(clientSocket.getOutputStream(), true); // the output that is connected to server
 
+
     }
 
     public void handle() throws IOException {
@@ -26,8 +24,11 @@ public class ServerHandler {
             String option = sc.nextLine().toUpperCase();
             out.println(option);
 
+            String message  = in.readLine();
+            System.out.println(message);
             switch (option) {
                 case "FUNRANGE": {
+                    System.out.println("here funrange");
                     String boringString = sc.nextLine();
                     out.println(boringString);
 
@@ -37,21 +38,34 @@ public class ServerHandler {
                     String endIndices = sc.nextLine();
                     out.println(endIndices);
 
-                    String res = in.readLine();
+//                    String line = in.readLine();
+//                    System.out.println(line);
 
-                    String res1 = in.readLine();
+                    String run = in.readLine();
+                    System.out.println(run);
 
-                    String res2 = in.readLine();
+                    String funnyId = in.readLine();
 
-                    String res3 = in.readLine();
+                    String boring = in.readLine();
 
-                    System.out.println(res);
-                    System.out.println(res1);
-                    System.out.println(res2);
-                    System.out.println(res3);
+                    String funnyString = in.readLine();
+
+                    String funRange = in.readLine();
+
+                    System.out.println(funnyId);
+                    System.out.println(boring);
+                    System.out.println(funnyString);
+                    System.out.println(funRange);
+
+                    String finishMessage  = in.readLine();
+                    System.out.println(finishMessage);
+
+                    System.out.println("end funrange");
                     break;
                 }
                 case "FUNNYSTRING": {
+
+                    System.out.println("here funnystring");
 
                     String boringString = sc.nextLine();
                     out.println(boringString);
@@ -65,42 +79,71 @@ public class ServerHandler {
                     String operations = sc.nextLine();
                     out.println(operations);
 
-                    String res = in.readLine();
 
-                    String res1 = in.readLine();
+//                    String line = in.readLine();
+//                    System.out.println(line);
 
-                    String res2 = in.readLine();
+                    String run = in.readLine();
+                    System.out.println(run);
 
-                    String res3 = in.readLine();
+                    String funnyId = in.readLine();
 
-                    System.out.println(res);
-                    System.out.println(res1);
-                    System.out.println(res2);
-                    System.out.println(res3);
+                    String boring = in.readLine();
+
+                    String funnyString = in.readLine();
+
+                    String funRange = in.readLine();
+
+                    System.out.println(funnyId);
+                    System.out.println(boring);
+                    System.out.println(funnyString);
+                    System.out.println(funRange);
+
+                    String finishMessage  = in.readLine();
+                    System.out.println(finishMessage);
+
+                    System.out.println("end funnystring");
                     break;
                 }
                 case "GET_FUNRANGEBYID": {
-//                    System.out.println("enter id : ");
+                    System.out.println("get funrange by id ");
+
                     String id = sc.nextLine();
                     out.println(id);
-                    String res = in.readLine();
 
-                    String res1 = in.readLine();
+                    String run = in.readLine();
+                    System.out.println(run);
 
-                    String res2 = in.readLine();
+//                    String line = in.readLine();
+//                    System.out.println(line);
 
-                    String res3 = in.readLine();
+                    String funnyId = in.readLine();
 
-                    System.out.println(res);
-                    System.out.println(res1);
-                    System.out.println(res2);
-                    System.out.println(res3);
+                    String boringString = in.readLine();
+
+                    String funnyString = in.readLine();
+
+                    String funRange = in.readLine();
+
+                    System.out.println(funnyId);
+                    System.out.println(boringString);
+                    System.out.println(funnyString);
+                    System.out.println(funRange);
+
+                    String finishMessage  = in.readLine();
+                    System.out.println(finishMessage);
+
+                    System.out.println("end get funrange by id");
+
                     break;
 
                 }
                 default:
                     break;
             }
+//            String finishMessage  = in.readLine();
+//            System.out.println(finishMessage);
+
         }
     }
 }

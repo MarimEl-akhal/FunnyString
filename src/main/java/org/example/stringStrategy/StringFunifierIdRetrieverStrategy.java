@@ -44,7 +44,6 @@ public class StringFunifierIdRetrieverStrategy extends RouterStrategy<StringFuni
             if (funnyStringEntity == null) {
                 return mapper.toResponseFail(id);
             }
-
         } catch (InvocationTargetException | InstantiationException | IllegalAccessException e) {
             System.err.println(e);
         }

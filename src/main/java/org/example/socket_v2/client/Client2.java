@@ -8,9 +8,6 @@ public class Client2 {
     private Socket clientSocket;
     private ServerHandler serverHandler;
 
-    public Client2() {
-    }
-
 
     public Client2(String ip, int port) {
         try {
@@ -25,8 +22,5 @@ public class Client2 {
 
     }
 
-    public Socket getClientSocket() {
-        return clientSocket;
-    }
 
 }

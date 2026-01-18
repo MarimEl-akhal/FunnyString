@@ -18,7 +18,10 @@ public class Main {
         OutputStrategy out = new PrintStanderStrategy();
 
         Router service = FactoryDependency.getDependency(Router.class);
-        service.execute(in, out);
+        while (true) {
+            service.execute(in, out);
+        }
+
 
     }
 }

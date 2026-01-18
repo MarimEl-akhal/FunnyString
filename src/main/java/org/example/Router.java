@@ -22,9 +22,8 @@ public class Router {
         while (true) {
             String option = inputStrategy.read().toUpperCase();
             for (RouterStrategy strategy : routerStrategies) {
-                if (option.equals(strategy.getOptionName())) {
-                    strategy.printOptionNameBeforeRun(inputStrategy,outputStrategy); //second way using template method
-//                    strategy.run(inputStrategy, outputStrategy);
+                if (option.equals(strategy.getOptionName().name())) {
+                    strategy.run(inputStrategy, outputStrategy);
                     break;
                 }
             }

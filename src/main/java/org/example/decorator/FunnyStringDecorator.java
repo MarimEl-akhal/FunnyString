@@ -19,7 +19,7 @@ import org.example.strategy.output.OutputStrategy;
 import java.io.IOException;
 import java.util.List;
 
-public class FunnyStringDecorator extends Decorator {
+public class FunnyStringDecorator implements RouterStrategy<FunnyStringRequest, FunnyStringResponse> {
     private final IParsing parsing;
     private final StringFunifier funnyString;
     private final DataBaseManager dbManager;
@@ -29,34 +29,21 @@ public class FunnyStringDecorator extends Decorator {
 
     private FunnyStringEntity funnyStringEntity;
 
-    public FunnyStringDecorator(RouterStrategy stringComponent) {
-        super(stringComponent);
+    public FunnyStringDecorator() {
         this.parsing = FactoryDependency.getDependency(Parsing.class);
         this.funnyString = FactoryDependency.getDependency(StringFunifier.class);
         this.dbManager = FactoryDependency.getDependency(DataBaseManager.class);
         this.mapper =  FactoryDependency.getDependency(FunnyStringMapper.class);
     }
 
-    @Override
-    public void run(InputStrategy inputStrategy, OutputStrategy outputStrategy) {
-        super.run(inputStrategy, outputStrategy);
-        try {
-            FunnyStringRequest request = setInput(inputStrategy);
-            FunnyStringResponse response = executeScenario(request);
-            sendOutPutMessage(response, outputStrategy);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
 
     @Override
-    public String getOptionName() {
-        return ClientOption.FUNNYSTRING.name();
+    public ClientOption getOptionName() {
+        return ClientOption.FUNNYSTRING;
     }
 
-
-    private FunnyStringRequest setInput(InputStrategy inputStrategy) throws IOException {
+ @Override
+    public FunnyStringRequest setInput(InputStrategy inputStrategy) throws IOException {
         String boringString = inputStrategy.read();
         String startIndices = inputStrategy.read();
         String endIndices = inputStrategy.read();
@@ -71,8 +58,8 @@ public class FunnyStringDecorator extends Decorator {
         return funnyStringRequest;
     }
 
-
-    private FunnyStringResponse executeScenario(FunnyStringRequest request) {
+@Override
+    public FunnyStringResponse executeScenario(FunnyStringRequest request) {
         String boringString = funnyStringRequest.getBoringString();
         List<Integer> startList = parsing.parseListOfIndexToken(funnyStringRequest.getStartIndices());
         List<Integer> endList = parsing.parseListOfIndexToken(funnyStringRequest.getEndIndices());
@@ -89,8 +76,8 @@ public class FunnyStringDecorator extends Decorator {
         return response;
     }
 
-
-    private void sendOutPutMessage(FunnyStringResponse response, OutputStrategy outputStrategy) {
+@Override
+    public void sendOutPutMessage(FunnyStringResponse response, OutputStrategy outputStrategy) {
         outputStrategy.print("FunnyId: " + response.getFunnyId());
         outputStrategy.print("BoringString: " + response.getBoringString());
         outputStrategy.print("FunnyString: " + response.getFunnyString());

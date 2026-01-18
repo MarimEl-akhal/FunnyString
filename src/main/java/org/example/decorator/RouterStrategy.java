@@ -1,15 +1,25 @@
 package org.example.decorator;
 
+import org.example.socket_v2.server.ClientOption;
 import org.example.strategy.input.InputStrategy;
 import org.example.strategy.output.OutputStrategy;
 
-public interface RouterStrategy {
-    void run(InputStrategy in, OutputStrategy out);
+import java.io.IOException;
 
-    String getOptionName();
+public interface  RouterStrategy<T, U> {
+     T setInput(InputStrategy inputStrategy) throws IOException;
 
-     default void printOptionNameBeforeRun(InputStrategy inputStrategy ,OutputStrategy outputStrategy){
-         this.getOptionName();
-         this.run(inputStrategy,outputStrategy);
-     }
+     U executeScenario(T request);
+
+     void sendOutPutMessage(U response, OutputStrategy outputStrategy);
+
+     ClientOption getOptionName();
+
+    default void run(InputStrategy inputStrategy, OutputStrategy outputStrategy) throws IOException {
+        T request = setInput(inputStrategy);
+        U response = executeScenario(request);
+        sendOutPutMessage(response, outputStrategy);
+    }
+
+
 }

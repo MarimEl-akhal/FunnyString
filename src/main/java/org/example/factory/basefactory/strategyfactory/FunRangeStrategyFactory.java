@@ -1,6 +1,6 @@
-package org.example.factory.strategyfactory;
+package org.example.factory.basefactory.strategyfactory;
 
-import org.example.factory.BaseFactory;
+import org.example.factory.basefactory.BaseFactory;
 import org.example.stringStrategy.FunRangeStrategy;
 
 public class FunRangeStrategyFactory implements BaseFactory<FunRangeStrategy> {

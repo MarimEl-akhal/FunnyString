@@ -13,7 +13,7 @@ import org.example.strategy.output.OutputStrategy;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
-public class StringFunifierIdRetrieverDecorator extends Decorator {
+public class StringFunifierIdRetrieverDecorator implements RouterStrategy<StringFunifierRetrieverRequest, StringFunifierRetrieverResponse> {
     private final DataBaseManager dbManager;
     private final StringFunifierRetrieverMapper mapper;
 
@@ -22,31 +22,19 @@ public class StringFunifierIdRetrieverDecorator extends Decorator {
     private FunnyStringEntity funnyStringEntity;
 
 
-    public StringFunifierIdRetrieverDecorator(RouterStrategy routerStrategyStrategyDecorator) {
-        super(routerStrategyStrategyDecorator);
+    public StringFunifierIdRetrieverDecorator() {
         this.dbManager = FactoryDependency.getDependency(DataBaseManager.class);
         this.mapper = FactoryDependency.getDependency(StringFunifierRetrieverMapper.class);
     }
 
 
     @Override
-    public String getOptionName() {
-        return ClientOption.GET_FUNRANGEBYID.name();
+    public ClientOption getOptionName() {
+        return ClientOption.GET_FUNRANGEBYID;
     }
 
     @Override
-    public void run(InputStrategy inputStrategy, OutputStrategy outputStrategy) {
-        super.run(inputStrategy, outputStrategy);
-        try {
-            StringFunifierRetrieverRequest request = setInput(inputStrategy);
-            StringFunifierRetrieverResponse response = executeScenario(request);
-            sendOutPutMessage(response, outputStrategy);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private StringFunifierRetrieverRequest setInput(InputStrategy inputStrategy) throws IOException {
+    public StringFunifierRetrieverRequest setInput(InputStrategy inputStrategy) throws IOException {
         String id = inputStrategy.read();
         stringFunifierRequest = new StringFunifierRetrieverRequest();
         stringFunifierRequest.setId(id);
@@ -54,7 +42,8 @@ public class StringFunifierIdRetrieverDecorator extends Decorator {
     }
 
 
-    private StringFunifierRetrieverResponse executeScenario(StringFunifierRetrieverRequest request) {
+    @Override
+    public StringFunifierRetrieverResponse executeScenario(StringFunifierRetrieverRequest request) {
         long id = Long.parseLong(stringFunifierRequest.getId());
         try {
             funnyStringEntity = (FunnyStringEntity) dbManager.getById(id, FunnyStringEntity.class);
@@ -69,8 +58,8 @@ public class StringFunifierIdRetrieverDecorator extends Decorator {
         return mapper.toResponse(funnyStringEntity, id);
     }
 
-
-    private void sendOutPutMessage(StringFunifierRetrieverResponse response, OutputStrategy outputStrategy) {
+    @Override
+    public void sendOutPutMessage(StringFunifierRetrieverResponse response, OutputStrategy outputStrategy) {
         outputStrategy.print("FunnyId: " + response.getFunnyId());
         outputStrategy.print("BoringString: " + response.getBoringString());
         outputStrategy.print("FunRange: " + response.getFunRangeString());

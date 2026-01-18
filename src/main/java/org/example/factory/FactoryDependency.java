@@ -3,12 +3,23 @@ package org.example.factory;
 import org.example.Router;
 import org.example.StringFunifier;
 import org.example.database.DataBaseManager;
+import org.example.decorator.FunRangeDecorator;
+import org.example.decorator.FunnyStringDecorator;
 import org.example.decorator.RouterStrategy;
-import org.example.factory.decoratorfactory.ChainDecoratorFactory;
-import org.example.factory.mapperfactory.FunRangeMapperFactory;
-import org.example.factory.mapperfactory.FunnyStringMapperFactory;
-import org.example.factory.mapperfactory.StringFunifierRetrieverMapperFactory;
-import org.example.factory.strategyfactory.*;
+import org.example.decorator.StringFunifierIdRetrieverDecorator;
+import org.example.factory.basefactory.BaseFactory;
+import org.example.factory.basefactory.ParsingFactory;
+import org.example.factory.basefactory.RouterFactory;
+import org.example.factory.basefactory.databasefactory.DataBaseManagerFactory;
+import org.example.factory.basefactory.decoratorfactory.FunRangeDecoratorFactory;
+import org.example.factory.basefactory.decoratorfactory.FunnyStringDecoratorFactory;
+import org.example.factory.basefactory.decoratorfactory.StringIdRetrieverDecoratorFactory;
+import org.example.factory.listbasefactory.decoratorfactory.ChainDecoratorFactory;
+import org.example.factory.basefactory.mapperfactory.FunRangeMapperFactory;
+import org.example.factory.basefactory.mapperfactory.FunnyStringMapperFactory;
+import org.example.factory.basefactory.mapperfactory.StringFunifierRetrieverMapperFactory;
+import org.example.factory.basefactory.strategyfactory.*;
+import org.example.factory.listbasefactory.ListBaseFactory;
 import org.example.mapper.FunRangeMapper;
 import org.example.mapper.FunnyStringMapper;
 import org.example.mapper.StringFunifierRetrieverMapper;
@@ -16,7 +27,6 @@ import org.example.operator.StringOperator;
 import org.example.parsingg.Parsing;
 import org.example.stringStrategy.FunRangeStrategy;
 import org.example.stringStrategy.FunnyStringStrategy;
-import org.example.stringStrategy.RouterStrategyContext;
 import org.example.stringStrategy.StringFunifierIdRetrieverStrategy;
 
 import java.util.HashMap;
@@ -43,6 +53,9 @@ public class FactoryDependency {
         map.put(StringFunifierIdRetrieverStrategy.class, new StringFunifierRetrieverFactory());
         map.put(FunnyStringStrategy.class, new FunnyStringStrategyFactory());
         map.put(FunRangeStrategy.class, new FunRangeStrategyFactory());
+        map.put(FunnyStringDecorator.class,new FunnyStringDecoratorFactory());
+        map.put(FunRangeDecorator.class,new FunRangeDecoratorFactory());
+        map.put(StringFunifierIdRetrieverDecorator.class,new StringIdRetrieverDecoratorFactory());
 
         listMap.put(RouterStrategy.class, new ChainDecoratorFactory());
     }
