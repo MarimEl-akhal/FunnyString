@@ -22,7 +22,6 @@ public class ClientHandler extends Thread {
 
                 ClientRequest clientRequest = new ClientRequest(clientSocket);
                 clientRequest.chooseClientOperation();
-
             }
         } catch (SQLException | IOException | InvocationTargetException | InstantiationException |
                  IllegalAccessException e) {

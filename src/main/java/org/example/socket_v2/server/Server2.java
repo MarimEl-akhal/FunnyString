@@ -22,6 +22,7 @@ public class Server2 {
                 Thread thread = new Thread(clientHandler);
                 thread.start();
 
+
             }
         } catch (IOException e) {
             System.err.println(e);

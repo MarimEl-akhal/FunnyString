@@ -14,7 +14,9 @@ public class Client2 {
             clientSocket = new Socket(ip, port);
             System.out.println("Client connected");
             serverHandler = new ServerHandler(clientSocket);
+            System.out.println("Server connected");
             serverHandler.handle();
+            System.out.println("Server stopped");
 
         } catch (IOException e) {
             System.err.println(e);

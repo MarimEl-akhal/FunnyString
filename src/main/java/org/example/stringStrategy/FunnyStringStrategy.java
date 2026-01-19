@@ -54,10 +54,10 @@ public class FunnyStringStrategy extends RouterStrategy<FunnyStringRequest,Funny
 
     @Override
     public FunnyStringResponse executeScenario(FunnyStringRequest request) {
-        String boringString = funnyStringRequest.getBoringString();
-        List<Integer> startList = parsing.parseListOfIndexToken(funnyStringRequest.getStartIndices());
-        List<Integer> endList = parsing.parseListOfIndexToken(funnyStringRequest.getEndIndices());
-        List<Operation> opsList = parsing.parseListOfOperationToken(funnyStringRequest.getOperations());
+        String boringString = request.getBoringString();
+        List<Integer> startList = parsing.parseListOfIndexToken(request.getStartIndices());
+        List<Integer> endList = parsing.parseListOfIndexToken(request.getEndIndices());
+        List<Operation> opsList = parsing.parseListOfOperationToken(request.getOperations());
 
         String stringFunny = funnyString.getFunnyString(boringString, startList, endList, opsList);
 

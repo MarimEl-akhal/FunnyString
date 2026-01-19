@@ -24,10 +24,6 @@ public class FunRangeDecorator implements RouterStrategy<FunRangeRequest, FunRan
     private final DataBaseManager dbManager;
     private final FunRangeMapper mapper;
 
-    private FunRangeRequest funRangeRequest;
-
-    private FunnyStringEntity funnyStringEntity;
-
 
     public FunRangeDecorator() {
         this.parsing = FactoryDependency.getDependency(Parsing.class);
@@ -50,7 +46,7 @@ public class FunRangeDecorator implements RouterStrategy<FunRangeRequest, FunRan
         String start = inputStrategy.read();
         String end = inputStrategy.read();
 
-        funRangeRequest = new FunRangeRequest();
+        FunRangeRequest funRangeRequest = new FunRangeRequest();
 
         funRangeRequest.setBoringString(boringString);
         funRangeRequest.setStartIndices(start);
@@ -66,16 +62,23 @@ public class FunRangeDecorator implements RouterStrategy<FunRangeRequest, FunRan
         List<Integer> endList = parsing.parseListOfIndexToken(request.getEndIndices());
 
         String funRange = funnyString.getFunRanges(boringString, startList, endList);
+        FunnyStringEntity funnyStringEntity = new FunnyStringEntity();
+        funnyStringEntity.setBoringString(boringString);
+        funnyStringEntity.setFunRange(funRange);
 
-        saveFunnyStringEntityData(boringString, funRange);
-        long funny_Id = dbManager.getFunnyId();
+        dbManager.insert(funnyStringEntity);
+        long funnyId = dbManager.getFunnyId();
+
+        for (int i = 0; i < startList.size(); i++) {
+            OperationRangeEntity operationRangeEntity = new OperationRangeEntity();
+            operationRangeEntity.setStartIndex(startList.get(i));
+            operationRangeEntity.setEndIndex(endList.get(i));
+            operationRangeEntity.setFunnyStringId(funnyId);
+            dbManager.insert(operationRangeEntity);
+        }
 
 
-        FunRangeResponse response = mapper.toResponse(funnyStringEntity, funny_Id);
-
-        saveOperationRangeEntityData(startList, endList, funny_Id);
-
-        return response;
+        return mapper.toResponse(funnyStringEntity, funnyId);
     }
 
     @Override
@@ -86,23 +89,11 @@ public class FunRangeDecorator implements RouterStrategy<FunRangeRequest, FunRan
     }
 
     private void saveFunnyStringEntityData(String boringString, String funRange) {
-        funnyStringEntity = new FunnyStringEntity();
-        funnyStringEntity.setBoringString(boringString);
-        funnyStringEntity.setFunRange(funRange);
 
-        dbManager.insert(funnyStringEntity);
     }
 
     private void saveOperationRangeEntityData(List<Integer> startList, List<Integer> endList, long id) {
 
-        OperationRangeEntity operationRangeEntity = new OperationRangeEntity();
-
-        for (int i = 0; i < startList.size(); i++) {
-            operationRangeEntity.setStartIndex(startList.get(i));
-            operationRangeEntity.setEndIndex(endList.get(i));
-        }
-        operationRangeEntity.setFunnyStringId(id);
-        dbManager.insert(operationRangeEntity);
 
     }
 }

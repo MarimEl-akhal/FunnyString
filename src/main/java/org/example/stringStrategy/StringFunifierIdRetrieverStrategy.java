@@ -38,7 +38,7 @@ public class StringFunifierIdRetrieverStrategy extends RouterStrategy<StringFuni
 
     @Override
     public StringFunifierRetrieverResponse executeScenario(StringFunifierRetrieverRequest request) {
-        long id = Long.parseLong(stringFunifierRequest.getId());
+        long id = Long.parseLong(request.getId());
         try {
             funnyStringEntity = (FunnyStringEntity) dbManager.getById(id, FunnyStringEntity.class);
             if (funnyStringEntity == null) {

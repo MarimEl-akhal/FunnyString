@@ -1,5 +1,7 @@
 package org.example.socket_v2.client;
 
+import org.example.socket_v2.server.ClientOption;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
@@ -23,12 +25,11 @@ public class ServerHandler {
         while (true) {
             String option = sc.nextLine().toUpperCase();
             out.println(option);
-
-            String message  = in.readLine();
-            System.out.println(message);
+            String finishMessage = "Strategy " + option + " is finished";
             switch (option) {
                 case "FUNRANGE": {
                     System.out.println("here funrange");
+
                     String boringString = sc.nextLine();
                     out.println(boringString);
 
@@ -38,27 +39,17 @@ public class ServerHandler {
                     String endIndices = sc.nextLine();
                     out.println(endIndices);
 
-//                    String line = in.readLine();
-//                    System.out.println(line);
 
-                    String run = in.readLine();
-                    System.out.println(run);
+                    String line;
+                    while ((line = in.readLine()) != null) {
+                        if (line.equals(finishMessage)) {
+                            System.out.println(line);
+                            break;
+                        }
+                        System.out.println(line);
+                    }
 
-                    String funnyId = in.readLine();
 
-                    String boring = in.readLine();
-
-                    String funnyString = in.readLine();
-
-                    String funRange = in.readLine();
-
-                    System.out.println(funnyId);
-                    System.out.println(boring);
-                    System.out.println(funnyString);
-                    System.out.println(funRange);
-
-                    String finishMessage  = in.readLine();
-                    System.out.println(finishMessage);
 
                     System.out.println("end funrange");
                     break;
@@ -79,71 +70,42 @@ public class ServerHandler {
                     String operations = sc.nextLine();
                     out.println(operations);
 
-
-//                    String line = in.readLine();
-//                    System.out.println(line);
-
-                    String run = in.readLine();
-                    System.out.println(run);
-
-                    String funnyId = in.readLine();
-
-                    String boring = in.readLine();
-
-                    String funnyString = in.readLine();
-
-                    String funRange = in.readLine();
-
-                    System.out.println(funnyId);
-                    System.out.println(boring);
-                    System.out.println(funnyString);
-                    System.out.println(funRange);
-
-                    String finishMessage  = in.readLine();
-                    System.out.println(finishMessage);
+                    String line;
+                    while ((line = in.readLine()) != null) {
+                        if (line.equals(finishMessage)) {
+                            System.out.println(line);
+                            break;
+                        }
+                        System.out.println(line);
+                    }
 
                     System.out.println("end funnystring");
                     break;
                 }
+
                 case "GET_FUNRANGEBYID": {
                     System.out.println("get funrange by id ");
 
                     String id = sc.nextLine();
                     out.println(id);
 
-                    String run = in.readLine();
-                    System.out.println(run);
+                    String line;
+                    while ((line = in.readLine()) != null) {
+                        if (line.equals(finishMessage)) {
+                            System.out.println(line);
+                            break;
+                        }
+                        System.out.println(line);
+                    }
 
-//                    String line = in.readLine();
-//                    System.out.println(line);
-
-                    String funnyId = in.readLine();
-
-                    String boringString = in.readLine();
-
-                    String funnyString = in.readLine();
-
-                    String funRange = in.readLine();
-
-                    System.out.println(funnyId);
-                    System.out.println(boringString);
-                    System.out.println(funnyString);
-                    System.out.println(funRange);
-
-                    String finishMessage  = in.readLine();
-                    System.out.println(finishMessage);
-
-                    System.out.println("end get funrange by id");
+                    System.out.println("end get fun range by id");
 
                     break;
-
                 }
-                default:
-                    break;
-            }
-//            String finishMessage  = in.readLine();
-//            System.out.println(finishMessage);
 
+
+            }
         }
+
     }
 }

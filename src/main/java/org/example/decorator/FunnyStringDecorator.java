@@ -25,15 +25,12 @@ public class FunnyStringDecorator implements RouterStrategy<FunnyStringRequest, 
     private final DataBaseManager dbManager;
     private final FunnyStringMapper mapper;
 
-    private FunnyStringRequest funnyStringRequest;
-
-    private FunnyStringEntity funnyStringEntity;
 
     public FunnyStringDecorator() {
         this.parsing = FactoryDependency.getDependency(Parsing.class);
         this.funnyString = FactoryDependency.getDependency(StringFunifier.class);
         this.dbManager = FactoryDependency.getDependency(DataBaseManager.class);
-        this.mapper =  FactoryDependency.getDependency(FunnyStringMapper.class);
+        this.mapper = FactoryDependency.getDependency(FunnyStringMapper.class);
     }
 
 
@@ -42,14 +39,14 @@ public class FunnyStringDecorator implements RouterStrategy<FunnyStringRequest, 
         return ClientOption.FUNNYSTRING;
     }
 
- @Override
+    @Override
     public FunnyStringRequest setInput(InputStrategy inputStrategy) throws IOException {
         String boringString = inputStrategy.read();
         String startIndices = inputStrategy.read();
         String endIndices = inputStrategy.read();
         String operations = inputStrategy.read();
 
-        funnyStringRequest = new FunnyStringRequest();
+        FunnyStringRequest funnyStringRequest = new FunnyStringRequest();
         funnyStringRequest.setBoringString(boringString);
         funnyStringRequest.setStartIndices(startIndices);
         funnyStringRequest.setEndIndices(endIndices);
@@ -58,50 +55,40 @@ public class FunnyStringDecorator implements RouterStrategy<FunnyStringRequest, 
         return funnyStringRequest;
     }
 
-@Override
+    @Override
     public FunnyStringResponse executeScenario(FunnyStringRequest request) {
-        String boringString = funnyStringRequest.getBoringString();
-        List<Integer> startList = parsing.parseListOfIndexToken(funnyStringRequest.getStartIndices());
-        List<Integer> endList = parsing.parseListOfIndexToken(funnyStringRequest.getEndIndices());
-        List<Operation> opsList = parsing.parseListOfOperationToken(funnyStringRequest.getOperations());
+        String boringString = request.getBoringString();
+        List<Integer> startList = parsing.parseListOfIndexToken(request.getStartIndices());
+        List<Integer> endList = parsing.parseListOfIndexToken(request.getEndIndices());
+        List<Operation> opsList = parsing.parseListOfOperationToken(request.getOperations());
 
         String stringFunny = funnyString.getFunnyString(boringString, startList, endList, opsList);
 
-        saveFunnyStringEntityData(boringString, stringFunny);
-        long funnyId = dbManager.getFunnyId();
-
-        FunnyStringResponse response = mapper.toResponse(funnyStringEntity, funnyId);
-        saveOperationRangeEntityData(startList, endList, opsList, funnyId);
-
-        return response;
-    }
-
-@Override
-    public void sendOutPutMessage(FunnyStringResponse response, OutputStrategy outputStrategy) {
-        outputStrategy.print("FunnyId: " + response.getFunnyId());
-        outputStrategy.print("BoringString: " + response.getBoringString());
-        outputStrategy.print("FunnyString: " + response.getFunnyString());
-    }
-
-    private void saveFunnyStringEntityData(String boringString, String stringFunny) {
-        funnyStringEntity = new FunnyStringEntity();
+        FunnyStringEntity funnyStringEntity = new FunnyStringEntity();
         funnyStringEntity.setBoringString(boringString);
         funnyStringEntity.setFunnyString(stringFunny);
 
         dbManager.insert(funnyStringEntity);
-    }
+        long funnyId = dbManager.getFunnyId();
 
-    private void saveOperationRangeEntityData(List<Integer> startList, List<Integer> endList, List<Operation> operationList, long id) {
 
-        OperationRangeEntity operationRangeEntity = new OperationRangeEntity();
         for (int i = 0; i < startList.size(); i++) {
+            OperationRangeEntity operationRangeEntity = new OperationRangeEntity();
             operationRangeEntity.setStartIndex(startList.get(i));
             operationRangeEntity.setEndIndex(endList.get(i));
-            operationRangeEntity.setOperation(operationList.get(i).name());
+            operationRangeEntity.setOperation(opsList.get(i).name());
+            operationRangeEntity.setFunnyStringId(funnyId);
+            dbManager.insert(operationRangeEntity);
         }
-        operationRangeEntity.setFunnyStringId(id);
-        dbManager.insert(operationRangeEntity);
 
+        return mapper.toResponse(funnyStringEntity, funnyId);
+    }
+
+    @Override
+    public void sendOutPutMessage(FunnyStringResponse response, OutputStrategy outputStrategy) {
+        outputStrategy.print("FunnyId: " + response.getFunnyId());
+        outputStrategy.print("BoringString: " + response.getBoringString());
+        outputStrategy.print("FunnyString: " + response.getFunnyString());
     }
 
 
