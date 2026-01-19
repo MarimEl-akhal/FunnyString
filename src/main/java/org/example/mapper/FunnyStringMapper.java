@@ -13,13 +13,4 @@ public class FunnyStringMapper {
 
         return response;
     }
-
-    public FunnyStringResponse toResponseFail(long id) {
-        FunnyStringResponse response = new FunnyStringResponse();
-        response.setFunnyId(id);
-        response.setBoringString("No data Found for id " + id);
-        response.setFunnyString("No data Found for id " + id);
-
-        return response;
-    }
 }

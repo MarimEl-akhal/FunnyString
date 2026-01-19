@@ -1,9 +1,9 @@
 package org.example;
 
-import org.example.decorator.RouterStrategy;
+import org.example.routerStrategyDecorator.stringFunifierStrategy.RouterStrategy;
 import org.example.factory.FactoryDependency;
-import org.example.strategy.input.InputStrategy;
-import org.example.strategy.output.OutputStrategy;
+import org.example.inputOutputSystem.input.InputStrategy;
+import org.example.inputOutputSystem.output.OutputStrategy;
 
 import java.io.IOException;
 import java.util.List;

@@ -14,12 +14,4 @@ public class FunRangeMapper {
         return response;
     }
 
-    public FunRangeResponse toResponseFail(long id) {
-        FunRangeResponse response = new FunRangeResponse();
-        response.setFunnyId(id);
-        response.setBoringString("No data Found for id " + id);
-        response.setFunRangeString("No data Found for id " + id);
-
-        return response;
-    }
 }

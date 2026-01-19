@@ -1,8 +1,8 @@
 package org.example;
 
 import org.example.factory.FactoryDependency;
-import org.example.operator.Operation;
-import org.example.operator.StringOperator;
+import org.example.stringFunifierOperator.Operation;
+import org.example.stringFunifierOperator.StringOperator;
 
 import java.util.List;
 
