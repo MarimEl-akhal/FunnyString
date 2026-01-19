@@ -6,8 +6,8 @@ import org.example.strategy.output.OutputStrategy;
 
 import java.io.IOException;
 
-public abstract class RouterDecorator<T,U> implements RouterStrategy<T,U> {
-    protected RouterStrategy <T,U> wrapper;
+public abstract class RouterDecorator<T, U> implements RouterStrategy<T, U> {
+    protected RouterStrategy<T, U> wrapper;
 
     public RouterDecorator(RouterStrategy routerStrategy) {
         this.wrapper = routerStrategy;

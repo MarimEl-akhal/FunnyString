@@ -14,12 +14,12 @@ import org.example.factory.basefactory.databasefactory.DataBaseManagerFactory;
 import org.example.factory.basefactory.decoratorfactory.FunRangeDecoratorFactory;
 import org.example.factory.basefactory.decoratorfactory.FunnyStringDecoratorFactory;
 import org.example.factory.basefactory.decoratorfactory.StringIdRetrieverDecoratorFactory;
-import org.example.factory.listbasefactory.decoratorfactory.ChainDecoratorFactory;
 import org.example.factory.basefactory.mapperfactory.FunRangeMapperFactory;
 import org.example.factory.basefactory.mapperfactory.FunnyStringMapperFactory;
 import org.example.factory.basefactory.mapperfactory.StringFunifierRetrieverMapperFactory;
 import org.example.factory.basefactory.strategyfactory.*;
 import org.example.factory.listbasefactory.ListBaseFactory;
+import org.example.factory.listbasefactory.decoratorfactory.ChainDecoratorFactory;
 import org.example.mapper.FunRangeMapper;
 import org.example.mapper.FunnyStringMapper;
 import org.example.mapper.StringFunifierRetrieverMapper;
@@ -53,9 +53,9 @@ public class FactoryDependency {
         map.put(StringFunifierIdRetrieverStrategy.class, new StringFunifierRetrieverFactory());
         map.put(FunnyStringStrategy.class, new FunnyStringStrategyFactory());
         map.put(FunRangeStrategy.class, new FunRangeStrategyFactory());
-        map.put(FunnyStringDecorator.class,new FunnyStringDecoratorFactory());
-        map.put(FunRangeDecorator.class,new FunRangeDecoratorFactory());
-        map.put(StringFunifierIdRetrieverDecorator.class,new StringIdRetrieverDecoratorFactory());
+        map.put(FunnyStringDecorator.class, new FunnyStringDecoratorFactory());
+        map.put(FunRangeDecorator.class, new FunRangeDecoratorFactory());
+        map.put(StringFunifierIdRetrieverDecorator.class, new StringIdRetrieverDecoratorFactory());
 
         listMap.put(RouterStrategy.class, new ChainDecoratorFactory());
     }

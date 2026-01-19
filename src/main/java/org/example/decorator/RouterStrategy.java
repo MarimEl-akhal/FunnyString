@@ -6,14 +6,14 @@ import org.example.strategy.output.OutputStrategy;
 
 import java.io.IOException;
 
-public interface  RouterStrategy<T, U> {
-     T setInput(InputStrategy inputStrategy) throws IOException;
+public interface RouterStrategy<T, U> {
+    T setInput(InputStrategy inputStrategy) throws IOException;
 
-     U executeScenario(T request);
+    U executeScenario(T request);
 
-     void sendOutPutMessage(U response, OutputStrategy outputStrategy);
+    void sendOutPutMessage(U response, OutputStrategy outputStrategy);
 
-     ClientOption getOptionName();
+    ClientOption getOptionName();
 
     default void run(InputStrategy inputStrategy, OutputStrategy outputStrategy) throws IOException {
         T request = setInput(inputStrategy);

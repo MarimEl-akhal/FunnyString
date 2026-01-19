@@ -1,10 +1,6 @@
 package org.example.factory.listbasefactory.decoratorfactory;
 
 import org.example.decorator.*;
-import org.example.dto.request.FunRangeRequest;
-import org.example.dto.request.FunnyStringRequest;
-import org.example.dto.response.FunRangeResponse;
-import org.example.dto.response.FunnyStringResponse;
 import org.example.factory.listbasefactory.ListBaseFactory;
 
 import java.util.List;

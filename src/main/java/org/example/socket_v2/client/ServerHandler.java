@@ -1,8 +1,9 @@
 package org.example.socket_v2.client;
 
-import org.example.socket_v2.server.ClientOption;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -28,8 +29,6 @@ public class ServerHandler {
             String finishMessage = "Strategy " + option + " is finished";
             switch (option) {
                 case "FUNRANGE": {
-                    System.out.println("here funrange");
-
                     String boringString = sc.nextLine();
                     out.println(boringString);
 
@@ -49,15 +48,9 @@ public class ServerHandler {
                         System.out.println(line);
                     }
 
-
-
-                    System.out.println("end funrange");
                     break;
                 }
                 case "FUNNYSTRING": {
-
-                    System.out.println("here funnystring");
-
                     String boringString = sc.nextLine();
                     out.println(boringString);
 
@@ -79,13 +72,10 @@ public class ServerHandler {
                         System.out.println(line);
                     }
 
-                    System.out.println("end funnystring");
                     break;
                 }
 
                 case "GET_FUNRANGEBYID": {
-                    System.out.println("get funrange by id ");
-
                     String id = sc.nextLine();
                     out.println(id);
 
@@ -97,8 +87,6 @@ public class ServerHandler {
                         }
                         System.out.println(line);
                     }
-
-                    System.out.println("end get fun range by id");
 
                     break;
                 }

@@ -2,8 +2,8 @@ package org.example.stringStrategy;
 
 import org.example.StringFunifier;
 import org.example.database.DataBaseManager;
-import org.example.dto.response.FunnyStringResponse;
 import org.example.dto.request.FunnyStringRequest;
+import org.example.dto.response.FunnyStringResponse;
 import org.example.entity.FunnyStringEntity;
 import org.example.entity.OperationRangeEntity;
 import org.example.factory.FactoryDependency;
@@ -18,7 +18,7 @@ import org.example.strategy.output.OutputStrategy;
 import java.io.IOException;
 import java.util.List;
 
-public class FunnyStringStrategy extends RouterStrategy<FunnyStringRequest,FunnyStringResponse> {
+public class FunnyStringStrategy extends RouterStrategy<FunnyStringRequest, FunnyStringResponse> {
     private final IParsing parsing;
     private final StringFunifier funnyString;
     private final DataBaseManager dbManager;

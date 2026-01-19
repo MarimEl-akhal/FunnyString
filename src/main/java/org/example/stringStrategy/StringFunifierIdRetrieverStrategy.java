@@ -33,7 +33,7 @@ public class StringFunifierIdRetrieverStrategy extends RouterStrategy<StringFuni
         String id = inputStrategy.read();
         stringFunifierRequest = new StringFunifierRetrieverRequest();
         stringFunifierRequest.setId(id);
-        return  stringFunifierRequest;
+        return stringFunifierRequest;
     }
 
     @Override
