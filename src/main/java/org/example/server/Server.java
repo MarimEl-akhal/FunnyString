@@ -1,0 +1,33 @@
+package org.example.server;
+
+
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class Server {
+    private ServerSocket serverSocket;
+    private ClientHandler clientHandler;
+
+    public Server(int port) {
+        try {
+            serverSocket = new ServerSocket(port);
+            System.out.println("Server Started");
+            System.out.println("Waiting for a client.");
+            while (true) {
+//                System.out.println("before");
+                Socket clientSocket = serverSocket.accept();
+                clientHandler = new ClientHandler(clientSocket);
+                System.out.println("Client accepted");
+                Thread thread = new Thread(clientHandler);
+                thread.start();
+
+
+            }
+        } catch (IOException e) {
+            System.err.println(e);
+        }
+
+    }
+
+}
