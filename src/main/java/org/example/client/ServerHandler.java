@@ -1,5 +1,12 @@
 package org.example.client;
 
+import org.example.io.method.input.BufferReaderStrategy;
+import org.example.io.method.input.InputStrategy;
+import org.example.io.method.input.ScannerStrategy;
+import org.example.io.method.output.OutputStrategy;
+import org.example.io.method.output.PrintStanderStrategy;
+import org.example.io.method.output.PrintWriterStrategy;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,76 +30,80 @@ public class ServerHandler {
 
     public void handle() throws IOException {
         Scanner sc = new Scanner(System.in);
+        InputStrategy scanner = new ScannerStrategy(sc);
+        InputStrategy buffer = new BufferReaderStrategy(in);
+        OutputStrategy pw = new PrintWriterStrategy(out);
+        OutputStrategy sys  =new PrintStanderStrategy();
         while (true) {
-            String option = sc.nextLine().toUpperCase();
-            out.println(option);
+            String option = scanner.read().toUpperCase();
+            pw.print(option);
 
-            String log = in.readLine();
-            System.out.println(log);
+            String log = buffer.read();
+            sys.print(log);
 
-            String run = in.readLine();
-            System.out.println(run);
+            String run = buffer.read();
+            sys.print(run);
 
             String finishMessage = "Strategy " + option + " is finished";
             switch (option) {
                 case "FUNRANGE": {
-                    String boringString = sc.nextLine();
-                    out.println(boringString);
+                    String boringString = scanner.read();
+                    pw.print(boringString);
 
-                    String startIndices = sc.nextLine();
-                    out.println(startIndices);
+                    String startIndices = scanner.read();
+                    pw.print(startIndices);
 
-                    String endIndices = sc.nextLine();
-                    out.println(endIndices);
+                    String endIndices = scanner.read();
+                    pw.print(endIndices);
 
 
                     String line;
-                    while ((line = in.readLine()) != null) {
+                    while ((line = buffer.read()) != null) {
                         if (line.equals(finishMessage)) {
-                            System.out.println(line);
+                            sys.print(line);
                             break;
                         }
-                        System.out.println(line);
+                        sys.print(line);
                     }
 
                     break;
                 }
                 case "FUNNYSTRING": {
-                    String boringString = sc.nextLine();
-                    out.println(boringString);
+                    String boringString = scanner.read();
+                    pw.print(boringString);
 
-                    String startIndices = sc.nextLine();
-                    out.println(startIndices);
+                    String startIndices = scanner.read();
+                    pw.print(startIndices);
 
-                    String endIndices = sc.nextLine();
-                    out.println(endIndices);
+                    String endIndices = scanner.read();
+                    pw.print(endIndices);
 
-                    String operations = sc.nextLine();
-                    out.println(operations);
+                    String operations = scanner.read();
+                    pw.print(operations);
 
                     String line;
-                    while ((line = in.readLine()) != null) {
+                    while ((line = buffer.read()) != null) {
                         if (line.equals(finishMessage)) {
-                            System.out.println(line);
+                            sys.print(line);
                             break;
                         }
-                        System.out.println(line);
+                        sys.print(line);
                     }
 
                     break;
                 }
 
                 case "GET_FUNRANGEBYID": {
-                    String id = sc.nextLine();
-                    out.println(id);
+                    String id = scanner.read();
+                    pw.print(id);
 
                     String line;
-                    while ((line = in.readLine()) != null) {
+                    while ((line = buffer.read()) != null) {
                         if (line.equals(finishMessage)) {
-                            System.out.println(line);
+                            sys.print(line);
                             break;
                         }
-                        System.out.println(line);
+                        sys.print(line);
                     }
 
                     break;
